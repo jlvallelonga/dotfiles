@@ -1,0 +1,27 @@
+"*":
+  "atom-ide-ui":
+    "atom-ide-code-format":
+      formatOnSave: true
+    "atom-ide-signature-help":
+      enable: false
+    use: {}
+  "autocomplete-plus":
+    confirmCompletion: "tab always, enter when suggestion explicitly selected"
+  core:
+    disabledPackages: [
+      "linter"
+    ]
+    telemetryConsent: "limited"
+  editor: {}
+  "exception-reporting":
+    userId: "edf301ff-2a39-40c1-b70e-d4bc955a1e9c"
+  "linter-ui-default": {}
+  "package-sync":
+    createOnChange: true
+    forceOverwrite: true
+  "prettier-atom":
+    formatOnSaveOptions:
+      enabled: true
+    useEslint: true
+  welcome:
+    showOnStartup: false
