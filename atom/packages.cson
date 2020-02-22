@@ -3,6 +3,7 @@ packages: [
   "atom-ide-debugger-node"
   "atom-ide-ui"
   "atom-keyboard-macros-vim"
+  "atom-shell-commands"
   "atom-typescript"
   "autocomplete-html-entities"
   "busy-signal"
@@ -17,5 +18,6 @@ packages: [
   "linter-ui-default"
   "package-sync"
   "prettier-atom"
+  "terminal-tab"
   "vim-mode-plus"
 ]
