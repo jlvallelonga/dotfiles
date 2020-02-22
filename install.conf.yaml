@@ -1,35 +1,41 @@
-- clean: ['~']
+- clean: ["~"]
 
 - link:
-    ~/.bash_profile: bash_profile
-    ~/.bashrc: bashrc
-    ~/.gitconfig: gitconfig
-    ~/.zshenv: zshenv
-    ~/.zshrc: zshrc
-    ~/.tool-versions: tool-versions
-    ~/.asdfrc: asdfrc
-    ~/.gitignore_global: gitignore_global
-    ~/.default-npm-packages: default-npm-packages
-    ~/.atom/config.cson:
-        force: true
-        path: atom/config.cson
-    ~/.atom/init.coffee:
-        force: true
-        path: atom/init.coffee
-    ~/.atom/keymap.cson:
-        force: true
-        path: atom/keymap.cson
-    ~/.atom/snippets.cson:
-        force: true
-        path: atom/snippets.cson
-    ~/.atom/styles.less:
-        force: true
-        path: atom/styles.less
-    ~/.atom/packages.cson:
-        force: true
-        path: atom/packages.cson
-    ~/.hammerspoon:
-        if: '[ `uname` = Darwin ]'
-        path: hammerspoon
-
-
+  ~/.bash_profile:
+    force: true
+    path: bash_profile
+  ~/.bashrc:
+    force: true
+    path: bashrc
+  ~/.zshenv:
+    force: true
+    path: zshenv
+  ~/.zshrc:
+    force: true
+    path: zshrc
+  ~/.tool-versions: tool-versions
+  ~/.asdfrc: asdfrc
+  ~/.default-npm-packages: default-npm-packages
+  ~/.gitconfig: gitconfig
+  ~/.gitignore_global: gitignore_global
+  ~/.atom/config.cson:
+    force: true
+    path: atom/config.cson
+  ~/.atom/init.coffee:
+    force: true
+    path: atom/init.coffee
+  ~/.atom/keymap.cson:
+    force: true
+    path: atom/keymap.cson
+  ~/.atom/snippets.cson:
+    force: true
+    path: atom/snippets.cson
+  ~/.atom/styles.less:
+    force: true
+    path: atom/styles.less
+  ~/.atom/packages.cson:
+    force: true
+    path: atom/packages.cson
+  ~/.hammerspoon:
+    if: "[ `uname` = Darwin ]"
+    path: hammerspoon
