@@ -53,15 +53,26 @@ function elixirInspect()
   hs.eventtap.keyStrokes("p")
 end
 
--- js console log - broken in atom
+-- javascript console.log() the current word (vim)
 function consoleLog()
-  hs.eventtap.keyStrokes("yiwoconsole.log('")
-  hs.eventtap.keyStroke({}, "escape")
-  hs.eventtap.keyStrokes("pa:")
-  hs.eventtap.keyStroke({}, "escape")
-  hs.eventtap.keyStrokes("la, ")
-  hs.eventtap.keyStroke({}, "escape")
-  hs.eventtap.keyStrokes("p")
+  -- atom doesn't like to take the vim commands as keyStrokes
+  -- so individually it is
+  hs.eventtap.keyStroke({}, "y", 50)
+  hs.eventtap.keyStroke({}, "i", 50)
+  hs.eventtap.keyStroke({}, "w", 50)
+  hs.eventtap.keyStroke({}, "o", 50)
+  hs.eventtap.keyStrokes("console.log('")
+  hs.eventtap.keyStroke({}, "escape", 50)
+  hs.eventtap.keyStroke({}, "p", 50)
+  hs.eventtap.keyStroke({}, "a", 50)
+  hs.eventtap.keyStrokes(": '")
+  hs.eventtap.keyStroke({}, "escape", 50)
+  hs.eventtap.keyStroke({}, "l", 50)
+  hs.eventtap.keyStroke({}, "a", 50)
+  hs.eventtap.keyStrokes(", ")
+  hs.eventtap.keyStroke({}, "escape", 50)
+  hs.eventtap.keyStroke({}, "escape", 50)
+  hs.eventtap.keyStroke({}, "p", 50)
 end
 
 -- run last terminal command again
@@ -71,13 +82,14 @@ function terminalRepeatLast()
   hs.eventtap.keyStroke({}, "return")
 end
 
--- test copied file (elixir)
-function testCopiedFile()
+-- test current file
+function testCurrentFile()
+  hs.eventtap.keyStroke({"shift", "alt", "cmd", "ctrl"}, "p")
   hs.application.launchOrFocus("iTerm")
   hs.eventtap.keyStroke({"cmd"}, "1")
   hs.eventtap.keyStroke({"ctrl"}, "c")
   hs.eventtap.keyStroke({"ctrl"}, "c")
-  hs.eventtap.keyStrokes("mf && mix test ")
+  hs.eventtap.keyStrokes("npm run test ")
   hs.eventtap.keyStroke({"cmd"}, "v")
   hs.eventtap.keyStroke({}, "return")
 end
@@ -136,7 +148,7 @@ rootBindings['m'] = showComputerName
 -- rootBindings['q'] = placeholderFunction
 rootBindings['r'] = reloadConfig
 -- rootBindings['s'] = placeholderFunction
-rootBindings['t'] = testCopiedFile
+rootBindings['t'] = testCurrentFile
 -- rootBindings['u'] = placeholderFunction
 -- rootBindings['v'] = placeholderFunction
 rootBindings['w'] = incrementWater
