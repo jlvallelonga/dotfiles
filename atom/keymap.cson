@@ -38,3 +38,4 @@
   'ctrl-alt-shift-cmd-down': 'window:move-active-item-to-pane-below'
   'ctrl-alt-shift-cmd-o': 'pane:close-other-items'
   'ctrl-alt-shift-cmd-p': 'editor:copy-project-path'
+  'ctrl-alt-shift-cmd-s': 'package-sync:sync'

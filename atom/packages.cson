@@ -10,7 +10,6 @@ packages: [
   "highlight-selected"
   "indent-guide-improved"
   "intentions"
-  "jekyll"
   "language-docker"
   "language-elixir"
   "language-lua"
