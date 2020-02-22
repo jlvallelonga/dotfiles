@@ -1,0 +1,7 @@
+[user]
+	email = jlvallelonga@gmail.com
+	name = Justin Vallelonga
+[core]
+	excludesfile = /Users/justinvallelonga/.gitignore_global
+[pager]
+	branch = false
