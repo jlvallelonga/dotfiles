@@ -7,7 +7,17 @@
     use: {}
   "autocomplete-plus":
     confirmCompletion: "tab always, enter when suggestion explicitly selected"
+    fileBlacklist: [
+      ".*"
+      "*.md"
+      "*.txt"
+    ]
+    scopeBlacklist: [
+      ".string"
+      ".comment"
+    ]
   core:
+    closeDeletedFileTabs: true
     disabledPackages: [
       "linter"
     ]
@@ -16,6 +26,12 @@
   "exception-reporting":
     userId: "edf301ff-2a39-40c1-b70e-d4bc955a1e9c"
   "linter-ui-default": {}
+  minimap:
+    plugins:
+      "highlight-selected": true
+      "highlight-selectedDecorationsZIndex": 0
+      selection: true
+      selectionDecorationsZIndex: 0
   "package-sync":
     createOnChange: true
     forceOverwrite: true
