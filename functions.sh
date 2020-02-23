@@ -1,17 +1,27 @@
 
+SRC_DIR=~/src/
+SSH_DIR=~/.ssh/
+DOTFILES_DIR=~/.dotfiles/
 
-# navigation
-nsrc () { cd ~/src/; }
-nssh () { cd ~/.ssh/; }
+# navigation - format: n<location or project>
+ndf () { cd $DOTFILES_DIR; }
+nsrc () { cd $SRC_DIR; }
+nssh () { cd $SSH_DIR; }
 ndown () { cd ~/Downloads; }
 ndesk () { cd ~/Desktop; }
 nca () { nsrc; cd chalk_api/; }
 nsing () { nsrc; cd singularity/; }
 nec () { nsing; cd everycampus-api/; }
 nnb () { nsing; cd nestjs-boilerplate/; }
-ndt () { cd ~/.dotfiles/; }
+
+# open ide with args
+oide () { atom $@; }
+
+# open project in ide- format: op<project>
+opdf () { oide $DOTFILES_DIR;}
 
 # git
+# diff files that aren't in a git repo
 gdni () { git diff --no-index $@; }
 
 # docker
