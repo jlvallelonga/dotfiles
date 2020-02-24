@@ -98,9 +98,7 @@ source $ZSH/oh-my-zsh.sh
 
 source ~/.dotfiles/aliases.sh
 source ~/.dotfiles/functions.sh
-
-# default working directory
-nsrc
+source ~/.dotfiles/local.gitignoreme.sh
 
 # asdf version manager
 . $HOME/.asdf/asdf.sh
