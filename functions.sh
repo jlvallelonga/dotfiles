@@ -14,15 +14,18 @@ nsing () { nsrc; cd singularity/; }
 nec () { nsing; cd everycampus-api/; }
 nnb () { nsing; cd nestjs-boilerplate/; }
 
+# git
+gdni () { git diff --no-index $@; } # diff files that aren't in a git repo
+ge () { git pull && git fetch --prune && git branch; }
+
 # open ide with args
 oide () { atom $@; }
 
 # open project in ide- format: op<project>
 opdf () { oide $DOTFILES_DIR;}
 
-# git
-# diff files that aren't in a git repo
-gdni () { git diff --no-index $@; }
+# dotfiles
+gedf () { local CURRDIR=`pwd`; ndf; ge; cd $CURRDIR; } # pull dotfiles changes from remote repo
 
 # docker
 docker_started () { if ! docker ps; then return 0; else return 1; fi }
