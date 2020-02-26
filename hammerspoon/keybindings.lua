@@ -32,6 +32,10 @@ function toggleChillNoiseGenerator()
   end
 end
 
+function openDotfilesProject()
+  os.execute('/usr/local/bin/atom ~/.dotfiles/')
+end
+
 function printLine()
   hs.eventtap.keyStroke({"cmd"}, "up")
   hs.eventtap.keyStroke({}, "return")
@@ -132,7 +136,7 @@ rootBindings['-'] = printLine
 rootBindings['a'] = terminalRepeatLast
 -- rootBindings['b'] = placeholderFunction
 rootBindings['c'] = toggleChillNoiseGenerator
--- rootBindings['d'] = placeholderFunction
+rootBindings['d'] = openDotfilesProject
 -- rootBindings['e'] = placeholderFunction
 -- rootBindings['f'] = placeholderFunction
 -- rootBindings['g'] = placeholderFunction
