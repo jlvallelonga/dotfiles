@@ -25,7 +25,8 @@
   editor: {}
   "exception-reporting":
     userId: "edf301ff-2a39-40c1-b70e-d4bc955a1e9c"
-  "linter-ui-default": {}
+  "linter-ui-default":
+    showPanel: true
   minimap:
     plugins:
       "highlight-selected": true
