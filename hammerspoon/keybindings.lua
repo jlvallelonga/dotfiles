@@ -1,5 +1,5 @@
 require('helpers')
-
+require('local_functions_gitignoreme')
 -- loop through bindings table and bind each to the function
 
 function incrementWater()
@@ -158,7 +158,7 @@ rootBindings['t'] = testCurrentFile
 rootBindings['w'] = incrementWater
 -- rootBindings['x'] = placeholderFunction
 -- rootBindings['y'] = placeholderFunction
--- rootBindings['z'] = placeholderFunction
+rootBindings['z'] = openStandupZoom
 
 for k,func in pairs(rootBindings) do
   bindAltKey(k, func)
