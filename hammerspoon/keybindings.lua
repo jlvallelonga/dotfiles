@@ -86,7 +86,6 @@ function terminalRepeatLast()
   hs.eventtap.keyStroke({}, "return")
 end
 
--- test current file
 function testCurrentFile()
   hs.eventtap.keyStroke({"shift", "alt", "cmd", "ctrl"}, "p")
   hs.application.launchOrFocus("iTerm")
@@ -94,6 +93,17 @@ function testCurrentFile()
   hs.eventtap.keyStroke({"ctrl"}, "c")
   hs.eventtap.keyStroke({"ctrl"}, "c")
   hs.eventtap.keyStrokes("npm run test ")
+  hs.eventtap.keyStroke({"cmd"}, "v")
+  hs.eventtap.keyStroke({}, "return")
+end
+
+function endToEndTestCurrentFile()
+  hs.eventtap.keyStroke({"shift", "alt", "cmd", "ctrl"}, "p")
+  hs.application.launchOrFocus("iTerm")
+  hs.eventtap.keyStroke({"cmd"}, "1")
+  hs.eventtap.keyStroke({"ctrl"}, "c")
+  hs.eventtap.keyStroke({"ctrl"}, "c")
+  hs.eventtap.keyStrokes("npm run test:e2e ")
   hs.eventtap.keyStroke({"cmd"}, "v")
   hs.eventtap.keyStroke({}, "return")
 end
@@ -137,7 +147,7 @@ rootBindings['a'] = terminalRepeatLast
 -- rootBindings['b'] = placeholderFunction
 rootBindings['c'] = toggleChillNoiseGenerator
 rootBindings['d'] = openDotfilesProject
--- rootBindings['e'] = placeholderFunction
+rootBindings['e'] = endToEndTestCurrentFile
 -- rootBindings['f'] = placeholderFunction
 -- rootBindings['g'] = placeholderFunction
 -- rootBindings['h'] = placeholderFunction
