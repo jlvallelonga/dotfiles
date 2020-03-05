@@ -70,7 +70,15 @@ mc () { mix compile; }
 bejs () { bundle exec jekyll serve; }
 
 # singularity
-rdb () { npx knex-migrate down --to=0; npx knex migrate:latest; dropdb everycampus_test_1; dropdb everycampus_test_2; dropdb everycampus_test_3; dropdb everycampus_test_4; dropdb everycampus_test_5; dropdb everycampus_test_6; dropdb everycampus_test_7; }
+# rdb () { npx knex-migrate down --to=0; npx knex migrate:latest; dropdb everycampus_test_1; dropdb everycampus_test_2; dropdb everycampus_test_3; dropdb everycampus_test_4; dropdb everycampus_test_5; dropdb everycampus_test_6; dropdb everycampus_test_7; }
+dbd () { yarn db:drop; }
+dbc () { yarn db:create; }
+dbm () { yarn db:migrate; }
+tdbd () { APP_ENV=test dbd;}
+tdbc () { APP_ENV=test dbc;}
+tdbm () { APP_ENV=test dbm;}
+trdb () { tdbd; tdbc; tdbm; }
+rdb () { dbd; dbc; dbm; trdb; }
 yc () { yarn console; }
 ys () { yarn serve; }
 dcora () { dco run api $@; }
@@ -82,6 +90,6 @@ boomboom () { dcod -v; dcob; }
 boomtown () { dcod -v; dcob; dco run api yarn migrations; dcou; }
 lf () { yarn eslint --fix "./**/*.js"; }
 kpgc () { psql -c "select pg_terminate_backend(pid) from pg_stat_activity where pid <> pg_backend_pid() and datname = '$@'"; }
-dbd () { kpgc everycampus_development; dropdb everycampus_development; createdb everycampus_development; psql -c "create role postgres with login createdb"; }
+# dbd () { kpgc everycampus_development; dropdb everycampus_development; createdb everycampus_development; psql -c "create role postgres with login createdb"; }
 devinit () { docker-compose run api ./bin/dev_init.sh; }
 e2e () { yarn test:e2e; }
