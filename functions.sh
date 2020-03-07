@@ -92,4 +92,5 @@ lf () { yarn eslint --fix "./**/*.js"; }
 kpgc () { psql -c "select pg_terminate_backend(pid) from pg_stat_activity where pid <> pg_backend_pid() and datname = '$@'"; }
 # dbd () { kpgc everycampus_development; dropdb everycampus_development; createdb everycampus_development; psql -c "create role postgres with login createdb"; }
 devinit () { docker-compose run api ./bin/dev_init.sh; }
+test () { yarn test; }
 e2e () { yarn test:e2e; }
