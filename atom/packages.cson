@@ -1,5 +1,4 @@
 packages: [
-  "atom-elixir"
   "atom-ide-debugger-node"
   "atom-ide-ui"
   "atom-keyboard-macros-vim"
@@ -7,11 +6,11 @@ packages: [
   "atom-typescript"
   "autocomplete-html-entities"
   "busy-signal"
+  "hey-pane"
   "highlight-selected"
   "indent-guide-improved"
   "intentions"
   "language-docker"
-  "language-elixir"
   "language-lua"
   "linter"
   "linter-ui-default"
@@ -19,6 +18,5 @@ packages: [
   "minimap-highlight-selected"
   "package-sync"
   "prettier-atom"
-  "terminal-tab"
   "vim-mode-plus"
 ]

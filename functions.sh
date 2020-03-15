@@ -92,5 +92,15 @@ lf () { yarn eslint --fix "./**/*.js"; }
 kpgc () { psql -c "select pg_terminate_backend(pid) from pg_stat_activity where pid <> pg_backend_pid() and datname = '$@'"; }
 # dbd () { kpgc everycampus_development; dropdb everycampus_development; createdb everycampus_development; psql -c "create role postgres with login createdb"; }
 devinit () { docker-compose run api ./bin/dev_init.sh; }
-test () { yarn test; }
-e2e () { yarn test:e2e; }
+test () { yarn test $@; }
+testd () { yarn test:debug $@; }
+e2e () { yarn test:e2e $@; }
+e2ed () { yarn test:e2e:debug $@; }
+cov () { yarn test:cov; }
+tests () { e2e; test; }
+etc () { e2e; test; cov; }
+ysd () { yarn start:dev; }
+
+# finds the word debugger in the current directory
+# can use like `debugger_in_dir && echo foo`
+debugger_in_dir () { if [[ $(rg debugger) ]]; then return 0; else return 1; fi }

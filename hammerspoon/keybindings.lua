@@ -1,6 +1,5 @@
 require('helpers')
 require('local_functions_gitignoreme')
--- loop through bindings table and bind each to the function
 
 function incrementWater()
   waterCount = waterCount + 1
@@ -88,24 +87,80 @@ end
 
 function testCurrentFile()
   hs.eventtap.keyStroke({"shift", "alt", "cmd", "ctrl"}, "p")
+  fileProjectPath = hs.pasteboard.getContents()
+
+  isE2eTest = string.find(fileProjectPath, '-spec.ts', 1, true) ~= nil
+  if (isE2eTest) then
+    command = "yarn test:e2e"
+  else
+    command = "yarn test"
+  end
+
+  runCommandInItermTab1('if [[ $(rg debugger) ]]; then echo "debug" | pbcopy; else echo "" | pbcopy; fi')
+
+  -- iterm still has focus
+  hs.timer.doAfter(1, function()
+    debugCommandPart = ''
+    debugOrNot = hs.pasteboard.readString()
+    -- if (debugOrNot == 'debug') then -- why does this not work!!!
+    if (string.find(debugOrNot, 'debug')) then
+      hs.eventtap.keyStrokes(command .. ':debug ' .. fileProjectPath)
+      hs.eventtap.keyStroke({}, "return")
+      openChromeInspectorAndContinue()
+    else
+      hs.eventtap.keyStrokes(command .. ' ' .. fileProjectPath)
+      hs.eventtap.keyStroke({}, "return")
+    end
+  end)
+end
+
+function runCommandInItermTab1(command)
   hs.application.launchOrFocus("iTerm")
   hs.eventtap.keyStroke({"cmd"}, "1")
+  -- in case you did a git diff or something with the "less" program
+  hs.eventtap.keyStroke({}, "q")
+
+  -- exit out of any running process
   hs.eventtap.keyStroke({"ctrl"}, "c")
+  -- a second time just to be sure
   hs.eventtap.keyStroke({"ctrl"}, "c")
-  hs.eventtap.keyStrokes("npm run test ")
-  hs.eventtap.keyStroke({"cmd"}, "v")
+
+  hs.eventtap.keyStrokes(command)
   hs.eventtap.keyStroke({}, "return")
 end
 
-function endToEndTestCurrentFile()
-  hs.eventtap.keyStroke({"shift", "alt", "cmd", "ctrl"}, "p")
-  hs.application.launchOrFocus("iTerm")
-  hs.eventtap.keyStroke({"cmd"}, "1")
-  hs.eventtap.keyStroke({"ctrl"}, "c")
-  hs.eventtap.keyStroke({"ctrl"}, "c")
-  hs.eventtap.keyStrokes("npm run test:e2e ")
-  hs.eventtap.keyStroke({"cmd"}, "v")
-  hs.eventtap.keyStroke({}, "return")
+function openChromeInspectorAndContinue()
+  hs.alert.show('opening chrome inspector...')
+  -- this doesn't work
+  -- os.execute('open chrome://inspect/#devices')
+  -- so...
+  hs.osascript.applescript([[
+set theURL to "chrome://inspect/#devices"
+tell application "Google Chrome"
+ if windows = {} then
+  make new window
+  set URL of (active tab of window 1) to theURL
+ else
+  make new tab at the end of window 1 with properties {URL:theURL}
+ end if
+ activate
+end tell
+]])
+  -- and then continuing on the the debugger'd code
+  -- wait for the inpsector tab to load
+  hs.timer.doAfter(2, function()
+    -- find the "inspect" link
+    hs.eventtap.keyStroke({"cmd"}, "f")
+    hs.eventtap.keyStrokes("inspect")
+    -- click the "inspect" link
+    hs.eventtap.keyStroke({"ctrl"}, "return")
+    -- wait for the debugger to load
+    hs.timer.doAfter(2, function()
+      -- cmd+\ to continue to the first breakpoint (automaticaly breaks on first line)
+      -- maybe there's a setting to turn autobreak on first line off?
+      hs.eventtap.keyStroke({"cmd"}, "\\")
+    end)
+  end)
 end
 
 -- hs.hotkey.bind({"alt"}, "4", function()
@@ -147,7 +202,7 @@ rootBindings['a'] = terminalRepeatLast
 -- rootBindings['b'] = placeholderFunction
 rootBindings['c'] = toggleChillNoiseGenerator
 rootBindings['d'] = openDotfilesProject
-rootBindings['e'] = endToEndTestCurrentFile
+-- rootBindings['e'] = placeholderFunction
 -- rootBindings['f'] = placeholderFunction
 -- rootBindings['g'] = placeholderFunction
 -- rootBindings['h'] = placeholderFunction
@@ -161,15 +216,16 @@ rootBindings['m'] = showComputerName
 -- rootBindings['p'] = placeholderFunction
 -- rootBindings['q'] = placeholderFunction
 rootBindings['r'] = reloadConfig
--- rootBindings['s'] = placeholderFunction
+rootBindings['s'] = openStandupZoom
 rootBindings['t'] = testCurrentFile
 -- rootBindings['u'] = placeholderFunction
 -- rootBindings['v'] = placeholderFunction
 rootBindings['w'] = incrementWater
--- rootBindings['x'] = placeholderFunction
+-- rootBindings['x'] = openChromeInspector
 -- rootBindings['y'] = placeholderFunction
 rootBindings['z'] = openStandupZoom
 
+-- loop through rootBindings table and bind each to the function
 for k,func in pairs(rootBindings) do
   bindAltKey(k, func)
 end
