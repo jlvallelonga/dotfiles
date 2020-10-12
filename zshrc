@@ -96,6 +96,7 @@ source $ZSH/oh-my-zsh.sh
 #
 # Example aliases
 
+echo "applying aliases, functions, and local"
 source ~/.dotfiles/aliases.sh
 source ~/.dotfiles/functions.sh
 source ~/.dotfiles/local.gitignoreme.sh
