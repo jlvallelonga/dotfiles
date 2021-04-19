@@ -3,5 +3,6 @@
 	name = Justin Vallelonga
 [core]
 	excludesfile = /Users/justinvallelonga/.gitignore_global
+	editor = vim
 [pager]
 	branch = false
