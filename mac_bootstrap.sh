@@ -8,10 +8,6 @@ xcode-select --install
 echo '--- Updating brew ---'
 brew update
 
-echo '--- Installing oh my zsh ---'
-# install oh my zsh first
-sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
 echo '--- Installing brew packages ---'
 brew install ripgrep
 

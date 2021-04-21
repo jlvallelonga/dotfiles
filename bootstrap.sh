@@ -6,18 +6,20 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
   ./mac_bootstrap.sh
 fi
 
+echo '--- Installing oh my zsh ---'
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
 echo '--- Creating local-only files ---'
 # create env and rc files that contain local only settings
 touch ~/.zshenv_local
 touch ~/.zshrc_local
 
 echo '--- Installing asdf ---'
-# install latest version of asdf
 git clone https://github.com/asdf-vm/asdf.git ~/.asdf
 (cd ~/.asdf && git checkout "$(git describe --abbrev=0 --tags)")
+source $HOME/.asdf/asdf.sh
 
 echo '--- Installing asdf plugins ---'
-# install asdf plugins
 asdf plugin-add nodejs
 asdf plugin-add ruby https://github.com/asdf-vm/asdf-ruby.git
 asdf plugin add erlang https://github.com/asdf-vm/asdf-erlang.git
