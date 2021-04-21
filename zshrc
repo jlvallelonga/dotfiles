@@ -90,14 +90,6 @@ source $ZSH/oh-my-zsh.sh
 # export ARCHFLAGS="-arch x86_64"
 
 # Aliases, Functions, and local private entries
-echo "applying aliases, functions, and local"
 source ~/.dotfiles/aliases.sh
 source ~/.dotfiles/functions.sh
-source ~/.dotfiles/local.gitignoreme.sh
-
-# asdf version manager
-. $HOME/.asdf/asdf.sh
-. $HOME/.asdf/completions/asdf.bash
-
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-. $HOME/.asdf/asdf.sh
+source ~/.zshrc_local

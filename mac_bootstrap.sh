@@ -1,17 +1,21 @@
 #!/usr/bin/env bash
 
-echo 'Installing for Mac'
+echo '*** Installing for Mac ***'
 
+echo '--- Installing xcode command line tools ---'
 xcode-select --install
 
+echo '--- Updating brew ---'
 brew update
 
+echo '--- Installing oh my zsh ---'
 # install oh my zsh first
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
+echo '--- Installing brew packages ---'
 brew install ripgrep
-brew install asdf
 
+echo '--- Installing brew casks ---'
 # if using atom uncomment these:
 # brew cask install atom
 # apm install package-sync

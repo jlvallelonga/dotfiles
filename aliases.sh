@@ -1,5 +1,4 @@
 
-
 # misc
 alias la='ls -lah'
 # output my ip address
@@ -16,7 +15,7 @@ alias sbrc="source ~/.bashrc"
 alias szrc="source ~/.zshrc"
 
 # git
-alias gs='git status'
+alias gst='git status'
 alias gsl='git stash list'
 alias gss='git stash show -p'
 alias gd='git diff'
