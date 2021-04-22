@@ -6,13 +6,13 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
   ./mac_bootstrap.sh
 fi
 
-echo '--- Installing oh my zsh ---'
-sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
 echo '--- Creating local-only files ---'
 # create env and rc files that contain local only settings
 touch ~/.zshenv_local
 touch ~/.zshrc_local
+
+echo '--- Running dotbot install ---'
+./install_dotbot.sh
 
 echo '--- Installing asdf ---'
 git clone https://github.com/asdf-vm/asdf.git ~/.asdf
@@ -28,5 +28,5 @@ asdf plugin-add elixir https://github.com/asdf-vm/asdf-elixir.git
 echo '--- Installing asdf versions ---'
 (cd ~ && asdf install)
 
-echo '--- Running dotbot install ---'
-./install_dotbot.sh
+echo '--- Installing oh my zsh ---'
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"

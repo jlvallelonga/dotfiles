@@ -1,7 +1,7 @@
 echo '--- Installing for Linux ---'
 
 echo '--- Installing packages with apt-get ---'
-sudo apt-get update  && apt-get -y install \
+sudo apt-get update && sudo apt-get -y install \
 build-essential \
 autoconf \
 m4 \
@@ -18,7 +18,8 @@ libxml2-utils \
 libncurses-dev \
 openjdk-11-jdk \
 zsh \
-curl
+curl \
+vim
 
 echo '--- Changing shell to zsh (relogin for this to take effect) ---'
 chsh -s $(which zsh)
