@@ -2,7 +2,7 @@
 	email = jlvallelonga@gmail.com
 	name = Justin Vallelonga
 [core]
-	excludesfile = /Users/justinvallelonga/.gitignore_global
+	excludesfile = ~/.gitignore_global
 	editor = vim
 [pager]
 	branch = false
