@@ -11,6 +11,9 @@ echo '--- Creating local-only files ---'
 touch ~/.zshenv_local
 touch ~/.zshrc_local
 
+echo '--- Creating src directory in home directory ---'
+mkdir src
+
 echo '--- Running dotbot install ---'
 ./install_dotbot.sh
 
