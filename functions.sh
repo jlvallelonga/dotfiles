@@ -29,7 +29,7 @@ gedf () { local CURRDIR=`pwd`; ndf; ge; cd $CURRDIR; } # pull dotfiles changes f
 
 # docker
 docker_started () { if ! docker ps; then return 0; else return 1; fi }
-dco () { docker-compose $@; }
+# dco () { docker-compose $@; } # commenting this because it's a built in alias with the docker-compose ohmyzsh plugin
 dcou () { dco up $@; }
 dcob () { dco build $@; }
 dcod () { dco down $@; }
