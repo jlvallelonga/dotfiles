@@ -13,6 +13,9 @@
     ~/.zshrc:
       force: true
       path: zshrc
+    ~/.vimrc:
+      force: true
+      path: vimrc
     ~/.tool-versions: tool-versions
     ~/.asdfrc: asdfrc
     ~/.default-npm-packages: default-npm-packages
