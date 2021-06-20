@@ -69,6 +69,9 @@ mc () { mix compile; }
 # jekyll
 bejs () { bundle exec jekyll serve; }
 
+# go
+gog () { go get $@; asdf reshim golang; }
+
 # singularity
 # rdb () { npx knex-migrate down --to=0; npx knex migrate:latest; dropdb everycampus_test_1; dropdb everycampus_test_2; dropdb everycampus_test_3; dropdb everycampus_test_4; dropdb everycampus_test_5; dropdb everycampus_test_6; dropdb everycampus_test_7; }
 dbd () { yarn db:drop; }
