@@ -11,6 +11,9 @@ brew update
 echo '--- Installing brew packages ---'
 brew install ripgrep
 
+echo '--- Installing brew packages ---'
+touch ~/.hammerspoon_local.lua
+
 echo '--- Installing brew casks ---'
 # if using atom uncomment these:
 # brew cask install atom

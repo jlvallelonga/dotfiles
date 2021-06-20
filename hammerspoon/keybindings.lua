@@ -1,5 +1,6 @@
 require('helpers')
-require('local_functions_gitignoreme')
+package.path = package.path .. ";" .. os.getenv("HOME") .. "/.?.lua"
+require('hammerspoon_local')
 
 function incrementWater()
   waterCount = waterCount + 1
