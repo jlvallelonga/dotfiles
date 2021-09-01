@@ -1,23 +1,19 @@
 #!/usr/bin/env bash
 
-echo '*** Installing for Mac ***'
-
-echo '--- Installing xcode command line tools ---'
-xcode-select --install
-
 echo '--- Updating brew ---'
 brew update
+
+echo '--- Installing requirements for asdf via brew ---'
+brew install coreutils
+brew install gnupg
 
 echo '--- Installing brew packages ---'
 brew install ripgrep
 
-echo '--- Installing brew packages ---'
+echo '--- Creating local-only hammerspoon file ---'
 touch ~/.hammerspoon_local.lua
 
 echo '--- Installing brew casks ---'
-# if using atom uncomment these:
-# brew cask install atom
-# apm install package-sync
 
 # caskable programs
 brew install --cask google-chrome

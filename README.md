@@ -1,1 +1,3 @@
-`git clone git@github.com:jlvallelonga/dotfiles.git ~/.dotfiles && (cd ~/.dotfiles && ./bootstrap.sh)`
+```
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/jlvallelonga/dotfiles/master/install.sh)"
+```

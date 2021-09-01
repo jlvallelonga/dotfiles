@@ -23,13 +23,18 @@ git clone https://github.com/asdf-vm/asdf.git ~/.asdf
 source $HOME/.asdf/asdf.sh
 
 echo '--- Installing asdf plugins ---'
-asdf plugin-add nodejs
-asdf plugin-add ruby https://github.com/asdf-vm/asdf-ruby.git
-asdf plugin add erlang https://github.com/asdf-vm/asdf-erlang.git
-asdf plugin-add elixir https://github.com/asdf-vm/asdf-elixir.git
+asdf plugin add nodejs
+# asdf plugin add erlang https://github.com/asdf-vm/asdf-erlang.git
+# asdf plugin add elixir https://github.com/asdf-vm/asdf-elixir.git
+asdf plugin add golang https://github.com/kennyp/asdf-golang.git
 
 echo '--- Installing asdf versions ---'
+# install via .tool-versions in home direcotry
 (cd ~ && asdf install)
+
+echo '--- Veifying asdf versions ---'
+node --version
+go version
 
 echo '--- Installing oh my zsh ---'
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
