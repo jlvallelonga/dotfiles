@@ -6,6 +6,9 @@ brew update
 echo '--- Installing requirements for asdf via brew ---'
 brew install coreutils
 brew install gnupg
+brew install autoconf
+brew install openssl
+brew install wxmac
 
 echo '--- Installing brew packages ---'
 brew install ripgrep

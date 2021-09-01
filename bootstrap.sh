@@ -24,17 +24,22 @@ source $HOME/.asdf/asdf.sh
 
 echo '--- Installing asdf plugins ---'
 asdf plugin add nodejs
-# asdf plugin add erlang https://github.com/asdf-vm/asdf-erlang.git
-# asdf plugin add elixir https://github.com/asdf-vm/asdf-elixir.git
+asdf plugin add erlang https://github.com/asdf-vm/asdf-erlang.git
+asdf plugin add elixir https://github.com/asdf-vm/asdf-elixir.git
 asdf plugin add golang https://github.com/kennyp/asdf-golang.git
 
 echo '--- Installing asdf versions ---'
 # install via .tool-versions in home direcotry
+
+# NOTE this is the only way I found that installing erlang works
+asdf install erlang 23.3
+
 (cd ~ && asdf install)
 
 echo '--- Veifying asdf versions ---'
 node --version
 go version
+elixir --version
 
 echo '--- Installing oh my zsh ---'
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
