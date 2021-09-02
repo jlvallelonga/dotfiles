@@ -10,15 +10,18 @@ echo '  NOTE: key repeat settings will be applied on restart'
 echo '--- Updating brew ---'
 brew update
 
-echo '--- Installing requirements for asdf via brew ---'
+echo '--- Installing brew packages ---'
+# requirements for asdf and asdf plugins
 brew install coreutils
 brew install gnupg
 brew install autoconf
 brew install openssl
 brew install wxmac
-
-echo '--- Installing brew packages ---'
+# other packages
 brew install ripgrep
+brew install sops
+brew install awscli
+brew install aws-vault
 
 echo '--- Installing brew casks ---'
 
