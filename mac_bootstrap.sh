@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
 
+echo '--- Creating local-only hammerspoon file ---'
+touch ~/.hammerspoon_local.lua
+
+echo '--- Updating mac settings ---'
+defaults write -g ApplePressAndHoldEnabled -bool false
+echo '  NOTE: key repeat settings will be applied on restart'
+
 echo '--- Updating brew ---'
 brew update
 
@@ -12,9 +19,6 @@ brew install wxmac
 
 echo '--- Installing brew packages ---'
 brew install ripgrep
-
-echo '--- Creating local-only hammerspoon file ---'
-touch ~/.hammerspoon_local.lua
 
 echo '--- Installing brew casks ---'
 
