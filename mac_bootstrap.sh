@@ -22,6 +22,7 @@ brew install ripgrep
 brew install sops
 brew install awscli
 brew install aws-vault
+brew install kubectx
 
 echo '--- Installing brew casks ---'
 
