@@ -37,3 +37,4 @@ brew install --cask zoom
 brew install --cask slack
 brew install --cask visual-studio-code
 brew install --cask insomnia
+brew install --cask karabiner-elements
