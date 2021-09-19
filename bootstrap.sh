@@ -14,6 +14,10 @@ touch ~/.zshrc_local
 echo '--- Creating src directory in home directory ---'
 mkdir ~/src
 
+echo '--- Creating ~/.starting_directory file ---'
+# create the starting directory file with ~/src (the actual explicit path) as the default
+(cd ~/src && echo `pwd` > ~/.starting_directory)
+
 echo '--- Running dotbot install ---'
 ./install_dotbot.sh
 

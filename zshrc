@@ -93,3 +93,6 @@ source $ZSH/oh-my-zsh.sh
 source ~/.dotfiles/aliases.sh
 source ~/.dotfiles/functions.sh
 source ~/.zshrc_local
+
+# start shell at starting directory
+nst
