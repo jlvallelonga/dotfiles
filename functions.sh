@@ -18,10 +18,9 @@ ge () { git pull && git fetch --prune && git branch; }
 # open IDE with args
 oide () { code $@; }
 
+# dotfiles
 # open project in IDE format: op<project>
 opdf () { oide $DOTFILES_DIR;}
-
-# dotfiles
 # pull dotfiles changes from remote repo
 gedf () { local CURRDIR=`pwd`; ndf; ge; cd $CURRDIR; }
 
@@ -79,3 +78,5 @@ ssd () { echo `pwd` > ~/.starting_directory; }
 # finds the word debugger in the current directory
 # can use like `debugger_in_dir && echo foo`
 debugger_in_dir () { if [[ $(rg debugger) ]]; then return 0; else return 1; fi }
+
+ohome () { oide ~;}
