@@ -6,6 +6,9 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
   ./mac_bootstrap.sh
 fi
 
+echo '--- Removing .zshrc file from home directory ---'
+rm ~/.zshrc
+
 echo '--- Creating local-only files ---'
 # create env and rc files that contain local only settings
 touch ~/.zshenv_local
