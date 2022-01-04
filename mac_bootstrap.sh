@@ -23,6 +23,7 @@ brew install sops
 brew install awscli
 brew install aws-vault
 brew install kubectx
+brew install cue-lang/tap/cue
 
 echo '--- Installing brew casks ---'
 
