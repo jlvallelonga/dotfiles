@@ -8,7 +8,7 @@ nsrc () { cd $SRC_DIR; }
 nssh () { cd $SSH_DIR; }
 ndown () { cd ~/Downloads; }
 ndesk () { cd ~/Desktop; }
-nst () { cd `cat ~/.starting_directory`; }
+nsd () { cd `cat ~/.starting_directory`; }
 
 # git
 # diff files that aren't in a git repo
