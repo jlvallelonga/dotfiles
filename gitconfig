@@ -8,3 +8,5 @@
 	branch = false
 [pull]
 	rebase = false
+[include]
+    path = gitconfig_local

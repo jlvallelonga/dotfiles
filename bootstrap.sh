@@ -13,6 +13,7 @@ echo '--- Creating local-only files ---'
 # create env and rc files that contain local only settings
 touch ~/.zshenv_local
 touch ~/.zshrc_local
+touch ~/.gitconfig_local
 
 echo '--- Creating src directory in home directory ---'
 mkdir ~/src
