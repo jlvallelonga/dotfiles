@@ -8,6 +8,7 @@ nsrc () { cd $SRC_DIR; }
 nssh () { cd $SSH_DIR; }
 ndown () { cd ~/Downloads; }
 ndesk () { cd ~/Desktop; }
+nard () { nsrc; cd arduino; }
 nst () { cd `cat ~/.starting_directory`; }
 
 # git
