@@ -3,13 +3,13 @@ SSH_DIR=~/.ssh/
 DOTFILES_DIR=~/.dotfiles/
 
 # navigation - format: n<location or project>
-ndf () { cd $DOTFILES_DIR; echo 'hint: try "opdf" command to open dotfiles in your IDE'; }
+ndf () { cd $DOTFILES_DIR; }
 nsrc () { cd $SRC_DIR; }
 nssh () { cd $SSH_DIR; }
 ndown () { cd ~/Downloads; }
 ndesk () { cd ~/Desktop; }
 nard () { nsrc; cd arduino; }
-nst () { cd `cat ~/.starting_directory`; }
+nsd () { cd `cat ~/.starting_directory`; }
 
 # git
 # diff files that aren't in a git repo

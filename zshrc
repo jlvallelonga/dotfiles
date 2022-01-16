@@ -95,4 +95,4 @@ source ~/.dotfiles/functions.sh
 source ~/.zshrc_local
 
 # start shell at starting directory
-nst
+nsd
