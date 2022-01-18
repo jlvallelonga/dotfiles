@@ -36,6 +36,10 @@ function openDotfilesProject()
   os.execute('/usr/local/bin/atom ~/.dotfiles/')
 end
 
+function pressEscapeKey()
+  hs.eventtap.keyStroke({}, "escape")
+end
+
 function printLine()
   hs.eventtap.keyStroke({"cmd"}, "up")
   hs.eventtap.keyStroke({}, "return")
@@ -203,7 +207,7 @@ rootBindings['a'] = terminalRepeatLast
 -- rootBindings['b'] = placeholderFunction
 rootBindings['c'] = toggleChillNoiseGenerator
 rootBindings['d'] = openDotfilesProject
--- rootBindings['e'] = placeholderFunction
+rootBindings['e'] = pressEscapeKey
 -- rootBindings['f'] = placeholderFunction
 -- rootBindings['g'] = placeholderFunction
 -- rootBindings['h'] = placeholderFunction
