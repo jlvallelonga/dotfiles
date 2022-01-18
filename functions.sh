@@ -17,6 +17,7 @@ ge () { git pull && git fetch --prune && git branch; }
 
 # open IDE with args
 oide () { code $@; }
+oph () { oide ~; }
 
 # dotfiles
 # open project in IDE format: op<project>
@@ -25,14 +26,39 @@ opdf () { oide $DOTFILES_DIR;}
 gedf () { local CURRDIR=`pwd`; ndf; ge; cd $CURRDIR; }
 
 # docker
-docker_started () { if ! docker ps; then return 0; else return 1; fi }
-# dco () { docker-compose $@; } # commenting this because it's a built in alias with the docker-compose ohmyzsh plugin
-dcou () { dco up $@; }
-dcob () { dco build $@; }
-dcod () { dco down $@; }
+docker_started () {
+    if docker ps > /dev/null 2>&1; then
+        # docker is running
+        return 0;
+    else
+        # docker is NOT running
+        return 1;
+    fi
+}
+start_docker () {
+    if ! docker_started; then
+        echo "Docker not started. Starting now.";
+        open -a Docker;
+    fi
+    max_retry=30
+    retry=0
+    while [ ${retry} -lt ${max_retry} ]; do
+        if docker_started; then
+            break
+        else
+            echo "docker not yet started";
+            (( retry = retry + 1 ))
+            sleep 1;
+        fi
+    done
+}
+dcomp () { start_docker; dco $@; }
+dcou () { dcomp up $@; }
+dcob () { dcomp build $@; }
+dcod () { dcomp down $@; }
 dcoub () { dcou --build; }
-dcobash () { dco run $1 bash; }
-dcor () { dco restart $@; }
+dcobash () { dcomp run $1 bash; }
+dcor () { dcomp restart $@; }
 dps () { docker ps; }
 
 # elixir/phoenix
