@@ -10,6 +10,9 @@ echo '  NOTE: key repeat settings will be applied on restart'
 echo '--- Updating brew ---'
 brew update
 
+echo '--- Setting up brew taps ---'
+brew tap mongodb/brew
+
 echo '--- Installing brew packages ---'
 # requirements for asdf and asdf plugins
 brew install coreutils
@@ -25,6 +28,7 @@ brew install awscli
 brew install aws-vault
 brew install kubectx
 brew install cue-lang/tap/cue
+brew install mongodb-database-tools
 
 echo '--- Installing brew casks ---'
 

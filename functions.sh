@@ -58,9 +58,9 @@ dcou () { dcomp up $@; }
 dcob () { dcomp build $@; }
 dcod () { dcomp down $@; }
 dcoub () { dcou --build; }
-dcobash () { dcomp run $1 bash; }
 dcor () { dcomp restart $@; }
-dps () { docker ps; }
+dps () { start_docker; docker ps; }
+dbash () { start_docker; docker exec -it $1 bash; }
 
 # elixir/phoenix
 mps () { mix phx.server; }
