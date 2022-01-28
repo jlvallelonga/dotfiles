@@ -88,6 +88,8 @@ bejs () { bundle exec jekyll serve; }
 # go
 gog () { go get $@; asdf reshim golang; }
 goi () { go install $@; asdf reshim golang; }
+gmt () { go mod tidy; }
+gmd () { go mod download; }
 
 # other
 kmps () { ps aux | grep 'mix phx.server' | grep -v grep | awk '{print "kill -9 " $2}' | bash; }
