@@ -10,3 +10,7 @@
 	rebase = false
 [include]
     path = ~/.gitconfig_local
+[color]
+	ui = true
+[color "status"]
+	branch = green
