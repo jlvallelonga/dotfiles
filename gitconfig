@@ -14,3 +14,5 @@
 	ui = true
 [color "status"]
 	branch = green
+[init]
+	defaultBranch = main
