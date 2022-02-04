@@ -16,7 +16,7 @@ nsd () { cd `cat ~/.starting_directory`; }
 gdni () { git diff --no-index $@; }
 ge () { git pull && git fetch --prune && git branch; }
 gcom () { git checkout master || git checkout main; }
-gitstatus () { git status; } # just a helper because zsh adds gst as an alias
+gst () { git status; }
 
 # open IDE with args
 oide () { code $@; }
