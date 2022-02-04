@@ -15,6 +15,7 @@ nsd () { cd `cat ~/.starting_directory`; }
 # diff files that aren't in a git repo
 gdni () { git diff --no-index $@; }
 ge () { git pull && git fetch --prune && git branch; }
+gcom () { git checkout master || git checkout main; }
 gitstatus () { git status; } # just a helper because zsh adds gst as an alias
 
 # open IDE with args

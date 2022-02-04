@@ -10,7 +10,6 @@ alias killswaps='find . -iname "*.sw[p|n|m]" | xargs rm'
 alias szrc="source ~/.zshrc"
 
 # git
-alias gst='git status'
 alias gsl='git stash list'
 alias gss='git stash show -p'
 alias gd='git diff'
@@ -22,7 +21,6 @@ alias gbv='git branch -vv'
 alias gbmm='git branch --merged master'
 alias gbms='git branch --merged staging'
 alias gbmd='git branch --merged development'
-alias gcom='git checkout master'
 alias gcos='git checkout staging'
 alias gcod='git checkout development'
 alias gp='git pull'
