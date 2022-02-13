@@ -3,24 +3,24 @@
 - link:
     ~/.bash_profile:
       force: true
-      path: bash_profile
+      path: files/bash_profile
     ~/.bashrc:
       force: true
-      path: bashrc
+      path: files/bashrc
     ~/.zshenv:
       force: true
-      path: zshenv
+      path: files/zshenv
     ~/.zshrc:
       force: true
-      path: zshrc
+      path: files/zshrc
     ~/.vimrc:
       force: true
-      path: vimrc
-    ~/.tool-versions: tool-versions
-    ~/.asdfrc: asdfrc
-    ~/.default-npm-packages: default-npm-packages
-    ~/.gitconfig: gitconfig
-    ~/.gitignore_global: gitignore_global
+      path: files/vimrc
+    ~/.tool-versions: files/tool-versions
+    ~/.asdfrc: files/asdfrc
+    ~/.default-npm-packages: files/default-npm-packages
+    ~/.gitconfig: files/gitconfig
+    ~/.gitignore_global: files/gitignore_global
     # ~/.atom/config.cson:
     #   force: true
     #   path: atom/config.cson
@@ -41,4 +41,4 @@
     #   path: atom/packages.cson
     ~/.hammerspoon:
       if: "[ `uname` = Darwin ]"
-      path: hammerspoon
+      path: files/hammerspoon
