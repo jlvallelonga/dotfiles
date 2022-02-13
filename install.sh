@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
-  ./linux_bootstrap.sh
+  ./linux_install.sh
 elif [[ "$OSTYPE" == "darwin"* ]]; then
-  ./mac_bootstrap.sh
+  ./mac_install.sh
 fi
 
 echo '--- Removing .zshrc file from home directory ---'
