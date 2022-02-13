@@ -92,7 +92,7 @@ source $ZSH/oh-my-zsh.sh
 # Aliases, Functions, and local private entries
 source ~/.dotfiles/aliases.sh
 source ~/.dotfiles/functions.sh
-source ~/.zshrc_local
+source ~/.zshrc_private
 
 # start shell at starting directory
 nsd
