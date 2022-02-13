@@ -15,6 +15,12 @@ nsd () { cd `cat ~/.starting_directory`; }
 # diff files that aren't in a git repo
 gdni () { git diff --no-index $@; }
 ge () { git pull && git fetch --prune && git branch; }
+gb () { git branch; }
+gcom () { git checkout master || git checkout main; }
+gst () { git status; }
+gbmm () { git branch --merged master > /dev/null 2>&1 || git branch --merged main; }
+gbmd () { git branch --merged development > /dev/null 2>&1 || git branch --merged dev; }
+gcod () { git checkout development > /dev/null 2>&1 || git checkout dev; }
 
 # open IDE with args
 oide () { code $@; }
@@ -90,6 +96,7 @@ gog () { go get $@; asdf reshim golang; }
 goi () { go install $@; asdf reshim golang; }
 gmt () { go mod tidy; }
 gmd () { go mod download; }
+gt () { go test ./...; }
 
 # other
 kmps () { ps aux | grep 'mix phx.server' | grep -v grep | awk '{print "kill -9 " $2}' | bash; }
