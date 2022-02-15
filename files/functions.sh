@@ -15,8 +15,8 @@ nsd () { cd `cat ~/.starting_directory`; }
 # diff files that aren't in a git repo
 gdni () { git diff --no-index $@; }
 ge () { git pull && git fetch --prune && git branch; }
-gb () { git branch; }
-gcom () { git checkout master || git checkout main; }
+gb () { git branch $@; }
+gcom () { git checkout master > /dev/null 2>&1 || git checkout main; }
 gst () { git status; }
 gbmm () { git branch --merged master > /dev/null 2>&1 || git branch --merged main; }
 gbmd () { git branch --merged development > /dev/null 2>&1 || git branch --merged dev; }
