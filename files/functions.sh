@@ -114,5 +114,12 @@ ssd () { echo `pwd` > ~/.starting_directory; }
 # finds the word debugger in the current directory
 # can use like `debugger_in_dir && echo foo`
 debugger_in_dir () { if [[ $(rg debugger) ]]; then return 0; else return 1; fi }
+br () {
+    if [[ "$OSTYPE" == "linux-gnu" ]]; then
+        xdg-open $@;
+    elif [[ "$OSTYPE" == "darwin"* ]]; then
+        open $@;
+    fi
+}
 
 ohome () { oide ~;}
