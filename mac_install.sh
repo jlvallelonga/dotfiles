@@ -46,3 +46,4 @@ brew install --cask insomnia
 brew install --cask karabiner-elements
 brew install --cask mongodb-compass
 brew install --cask discord
+brew install --cask spotify
