@@ -12,6 +12,7 @@ brew update
 
 echo '--- Setting up brew taps ---'
 brew tap mongodb/brew
+brew tap hashicorp/tap
 
 echo '--- Installing brew packages ---'
 # requirements for asdf and asdf plugins
@@ -29,6 +30,7 @@ brew install aws-vault
 brew install kubectx
 brew install cue-lang/tap/cue
 brew install mongodb-database-tools
+brew install hashicorp/tap/vault
 
 echo '--- Installing brew casks ---'
 
