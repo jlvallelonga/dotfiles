@@ -13,6 +13,7 @@ brew update
 echo '--- Setting up brew taps ---'
 brew tap mongodb/brew
 brew tap hashicorp/tap
+brew tap nats-io/nats-tools
 
 echo '--- Installing brew packages ---'
 # requirements for asdf and asdf plugins
@@ -31,6 +32,7 @@ brew install kubectx
 brew install cue-lang/tap/cue
 brew install mongodb-database-tools
 brew install hashicorp/tap/vault
+brew install nats-io/nats-tools/nats
 
 echo '--- Installing brew casks ---'
 
