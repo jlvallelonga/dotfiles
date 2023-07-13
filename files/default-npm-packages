@@ -1,3 +1,4 @@
 lodash
 faker
 nodemon
+dotenv-cli

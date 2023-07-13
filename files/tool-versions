@@ -1,4 +1,5 @@
-nodejs 16.15.1
+nodejs 19.4.0
 golang 1.18
 erlang 23.3
 elixir 1.11
+flutter 3.10.4-stable

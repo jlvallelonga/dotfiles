@@ -21,23 +21,84 @@ function toggleKarabiner()
   toggleApplication("org.pqrs.Karabiner")
 end
 
-function toggleChillNoiseGenerator()
-  appName = "com.davecheng.chilllite"
-  if toggleApplication(appName) == "started" then
-    -- press the button to close the pop-up
-    hs.timer.doAfter(1, function()
-      hs.application.launchOrFocusByBundleID(appName)
-      hs.eventtap.keyStroke({}, "return")
-    end)
+-- function toggleChillNoiseGenerator()
+--   appName = "com.davecheng.chilllite"
+--   if toggleApplication(appName) == "started" then
+--     -- press the button to close the pop-up
+--     hs.timer.doAfter(1, function()
+--       hs.application.launchOrFocusByBundleID(appName)
+--       hs.eventtap.keyStroke({}, "return")
+--     end)
+--   end
+-- end
+
+function showClipboardHistory()
+  spoon.TextClipboardHistory:showClipboard()
+end
+
+-- function openDotfilesProject()
+--   os.execute('/usr/local/bin/atom ~/.dotfiles/')
+-- end
+
+function typeCurrentDate()
+  local date_str = getCurrentDateAsString()
+
+  -- get the focused window's application
+  local app = hs.window.focusedWindow():application()
+
+  -- use hs.eventtap to emulate typing the date_str
+  hs.eventtap.keyStrokes(date_str)
+end
+
+function typeTimeTrackingHeader()
+  local date_str = getCurrentDateAsString()
+
+  -- get the day of week
+  local day_of_week = os.date("%A")
+
+  -- combine date string and day of week
+  local output_str = string.format("%s - %s - total ", date_str, day_of_week)
+
+  -- get the focused window's application
+  local app = hs.window.focusedWindow():application()
+
+  -- use hs.eventtap to emulate typing the output_str
+  hs.eventtap.keyStrokes(output_str)
+end
+
+
+function openCurrentDirectoryInEditor()
+  appName = "iTerm2"
+  -- if iTerm application is not in focus then the command has no effect
+  if isAppInFocus(appName) then
+    hs.eventtap.keyStrokes("opwd")
+    hs.eventtap.keyStroke({}, "return")
+  else
+    quickAlert(string.format("%s is not in focus", appName))
   end
 end
 
-function openDotfilesProject()
-  os.execute('/usr/local/bin/atom ~/.dotfiles/')
-end
+function typeCurrentTime()
+  local time = os.date("*t")  -- get table with current date and time
+  local hours = time.hour
+  local minutes = time.min
+  local am_pm = "AM"
 
-function pressEscapeKey()
-  hs.eventtap.keyStroke({}, "escape")
+  if hours > 12 then
+      hours = hours - 12
+      am_pm = "PM"
+  elseif hours == 0 then
+      hours = 12
+  end
+
+  -- format the time string
+  local time_str = string.format("%02d:%02d %s", hours, minutes, am_pm)
+
+  -- get the focused window's application
+  local app = hs.window.focusedWindow():application()
+
+  -- use hs.eventtap to emulate typing the time_str
+  hs.eventtap.keyStrokes(time_str)
 end
 
 function printLine()
@@ -50,16 +111,31 @@ function printLine()
   hs.eventtap.keyStroke({}, "up")
 end
 
--- elixir inspect
-function elixirInspect()
-  hs.eventtap.keyStrokes("viwyo")
-  hs.eventtap.keyStrokes("IO.inspect(")
-  hs.eventtap.keyStroke({}, "escape")
-  hs.eventtap.keyStrokes("pa")
-  hs.eventtap.keyStrokes(", label: \"")
-  hs.eventtap.keyStroke({}, "escape")
-  hs.eventtap.keyStrokes("p")
+-- -- elixir inspect
+-- function elixirInspect()
+--   hs.eventtap.keyStrokes("viwyo")
+--   hs.eventtap.keyStrokes("IO.inspect(")
+--   hs.eventtap.keyStroke({}, "escape")
+--   hs.eventtap.keyStrokes("pa")
+--   hs.eventtap.keyStrokes(", label: \"")
+--   hs.eventtap.keyStroke({}, "escape")
+--   hs.eventtap.keyStrokes("p")
+-- end
+
+function typeMongoFindByObjectIdFromClipboard()
+  -- get content of the clipboard
+  local clipboard_content = hs.pasteboard.getContents()
+
+  -- format the string with clipboard content
+  local output_str = string.format("{_id: ObjectId('%s')}", clipboard_content)
+
+  -- get the focused window's application
+  local app = hs.window.focusedWindow():application()
+
+  -- use hs.eventtap to emulate typing the output_str
+  hs.eventtap.keyStrokes(output_str)
 end
+
 
 -- javascript console.log() the current word (vim)
 function consoleLog()
@@ -90,34 +166,34 @@ function terminalRepeatLast()
   hs.eventtap.keyStroke({}, "return")
 end
 
-function testCurrentFile()
-  hs.eventtap.keyStroke({"shift", "alt", "cmd", "ctrl"}, "p")
-  fileProjectPath = hs.pasteboard.getContents()
+-- function testCurrentFile()
+--   hs.eventtap.keyStroke({"shift", "alt", "cmd", "ctrl"}, "p")
+--   fileProjectPath = hs.pasteboard.getContents()
 
-  isE2eTest = string.find(fileProjectPath, '-spec.ts', 1, true) ~= nil
-  if (isE2eTest) then
-    command = "yarn test:e2e"
-  else
-    command = "yarn test"
-  end
+--   isE2eTest = string.find(fileProjectPath, '-spec.ts', 1, true) ~= nil
+--   if (isE2eTest) then
+--     command = "yarn test:e2e"
+--   else
+--     command = "yarn test"
+--   end
 
-  runCommandInItermTab1('if [[ $(rg debugger) ]]; then echo "debug" | pbcopy; else echo "" | pbcopy; fi')
+--   runCommandInItermTab1('if [[ $(rg debugger) ]]; then echo "debug" | pbcopy; else echo "" | pbcopy; fi')
 
-  -- iterm still has focus
-  hs.timer.doAfter(1, function()
-    debugCommandPart = ''
-    debugOrNot = hs.pasteboard.readString()
-    -- if (debugOrNot == 'debug') then -- why does this not work!!!
-    if (string.find(debugOrNot, 'debug')) then
-      hs.eventtap.keyStrokes(command .. ':debug ' .. fileProjectPath)
-      hs.eventtap.keyStroke({}, "return")
-      openChromeInspectorAndContinue()
-    else
-      hs.eventtap.keyStrokes(command .. ' ' .. fileProjectPath)
-      hs.eventtap.keyStroke({}, "return")
-    end
-  end)
-end
+--   -- iterm still has focus
+--   hs.timer.doAfter(1, function()
+--     debugCommandPart = ''
+--     debugOrNot = hs.pasteboard.readString()
+--     -- if (debugOrNot == 'debug') then -- why does this not work!!!
+--     if (string.find(debugOrNot, 'debug')) then
+--       hs.eventtap.keyStrokes(command .. ':debug ' .. fileProjectPath)
+--       hs.eventtap.keyStroke({}, "return")
+--       openChromeInspectorAndContinue()
+--     else
+--       hs.eventtap.keyStrokes(command .. ' ' .. fileProjectPath)
+--       hs.eventtap.keyStroke({}, "return")
+--     end
+--   end)
+-- end
 
 function runCommandInItermTab1(command)
   hs.application.launchOrFocus("iTerm")
@@ -205,13 +281,13 @@ rootBindings = {}
 rootBindings['-'] = printLine
 rootBindings['a'] = terminalRepeatLast
 -- rootBindings['b'] = placeholderFunction
-rootBindings['c'] = toggleChillNoiseGenerator
-rootBindings['d'] = openDotfilesProject
-rootBindings['e'] = pressEscapeKey
+rootBindings['c'] = showClipboardHistory
+rootBindings['d'] = typeCurrentDate
+rootBindings['e'] = openCurrentDirectoryInEditor
 -- rootBindings['f'] = placeholderFunction
 -- rootBindings['g'] = placeholderFunction
--- rootBindings['h'] = placeholderFunction
-rootBindings['i'] = elixirInspect
+rootBindings['h'] = typeTimeTrackingHeader
+rootBindings['i'] = typeMongoFindByObjectIdFromClipboard
 -- rootBindings['j'] = placeholderFunction
 rootBindings['k'] = toggleKarabiner
 rootBindings['l'] = consoleLog
@@ -222,7 +298,7 @@ rootBindings['m'] = showComputerName
 -- rootBindings['q'] = placeholderFunction
 rootBindings['r'] = reloadConfig
 rootBindings['s'] = openStandupZoom
-rootBindings['t'] = testCurrentFile
+rootBindings['t'] = typeCurrentTime
 -- rootBindings['u'] = placeholderFunction
 -- rootBindings['v'] = placeholderFunction
 rootBindings['w'] = incrementWater

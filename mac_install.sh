@@ -33,6 +33,8 @@ brew install cue-lang/tap/cue
 brew install mongodb-database-tools
 brew install hashicorp/tap/vault
 brew install nats-io/nats-tools/nats
+brew install duti
+brew install jq
 
 echo '--- Installing brew casks ---'
 
@@ -42,7 +44,7 @@ brew install --cask iterm2
 brew install --cask hammerspoon
 brew install --cask spectacle
 brew install --cask postico
-brew install --cask docker
+# brew install --cask docker
 brew install --cask zoom
 brew install --cask slack
 brew install --cask visual-studio-code
@@ -51,3 +53,8 @@ brew install --cask karabiner-elements
 brew install --cask mongodb-compass
 brew install --cask discord
 brew install --cask spotify
+brew install --cask postman
+brew install --cask alfred
+brew install orbstack
+
+./install_spoon_install.sh

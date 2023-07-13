@@ -20,11 +20,17 @@ gcom () { git checkout master > /dev/null 2>&1 || git checkout main; }
 gst () { git status; }
 gbmm () { git branch --merged master > /dev/null 2>&1 || git branch --merged main; }
 gbmd () { git branch --merged development > /dev/null 2>&1 || git branch --merged dev; }
-gcod () { git checkout development > /dev/null 2>&1 || git checkout dev; }
+gbmdd() { gbmd | grep -v "\*" | xargs -n 1 git branch -d; }
+gcod () { git checkout development $@ > /dev/null 2>&1 || git checkout dev $@; }
 
 # open IDE with args
 oide () { code $@; }
 oph () { oide ~; }
+# open working directory in IDE
+opwd () { oide `pwd`; }
+
+# rg (repgrep) searching all hidden and ignored files
+rga () { rg --hidden --no-ignore $@; }
 
 # dotfiles
 # open project in IDE format: op<project>
@@ -45,7 +51,8 @@ docker_started () {
 start_docker () {
     if ! docker_started; then
         echo "Docker not started. Starting now.";
-        open -a Docker;
+        # open -a Docker;
+        open -a Orbstack;
     fi
     max_retry=30
     retry=0
@@ -67,6 +74,28 @@ dcoub () { dcou --build; }
 dcor () { dcomp restart $@; }
 dps () { start_docker; docker ps; }
 dbash () { start_docker; docker exec -it $1 bash; }
+dreset () {
+    echo "--- docker compose down --volumes ---"
+    dcod -v;
+    echo "--- pruning containers ---"
+    docker container prune -f;
+    echo "--- pruning images ---"
+    docker image prune -a -f;
+    echo "--- pruning volumes ---"
+    docker volume prune -f;
+    echo "--- pruning networks ---"
+    docker network prune -f;
+    echo "--- docker system prune -a --volumes -f ---"
+    docker system prune -a --volumes -f;
+    echo "--- images ---"
+    docker image ls -a;
+    echo "--- containers ---"
+    docker container ls -a;
+    echo "--- volumes ---"
+    docker volume ls;
+    echo "--- networks ---"
+    docker network ls;
+}
 
 # elixir/phoenix
 mps () { mix phx.server; }
@@ -112,7 +141,7 @@ sbp () { brew services start postgres; }
 # Doctor?
 dre () { kbp; dcod; dcoub; }
 # set starting directory
-ssd () { echo `pwd` > ~/.starting_directory; }
+ssd () { echo `pwd` > ~/.starting_directory; echo "starting directory now set to: "; cat ~/.starting_directory; }
 # finds the word debugger in the current directory
 # can use like `debugger_in_dir && echo foo`
 debugger_in_dir () { if [[ $(rg debugger) ]]; then return 0; else return 1; fi }
@@ -123,5 +152,3 @@ br () {
         open $@;
     fi
 }
-
-ohome () { oide ~;}

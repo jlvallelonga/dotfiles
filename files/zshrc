@@ -60,6 +60,8 @@ ZSH_THEME="amuse"
 # see 'man strftime' for details.
 # HIST_STAMPS="mm/dd/yyyy"
 
+setopt histignoredups
+
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 

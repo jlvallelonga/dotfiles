@@ -1,3 +1,7 @@
 # commenting this because I want to know if this isn't ignore in a specific repo. leaving it commented so that I have an example of the glob pattern
 #/**/.DS_Store
 **/*gitignoreme*
+
+# file that is created when running code in vscode via Code Runner
+# https://marketplace.visualstudio.com/items?itemName=formulahendry.code-runner
+**/tempCodeRunnerFile.sh

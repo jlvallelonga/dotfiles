@@ -1,3 +1,31 @@
+hs.loadSpoon("SpoonInstall")
+
+spoon.SpoonInstall:andUse("TextClipboardHistory", {
+    start = true
+})
+-- spoon.SpoonInstall:andUse("SpeedMenu", {
+--     start = true
+-- })
+
+
+-- spoon.SpeedMenu:rescan()
+
+-- function installSpeedMenu()
+--     spoon.SpoonInstall:asyncInstallSpoonFromRepo(
+--       'https://github.com/Hammerspoon/Spoons',
+--       'master',
+--       'SpeedMenu',
+--       function(result)
+--         if not result then
+--           hs.logger.new('Hammerspoon', 'error'):e('Failed to install SpeedMenu spoon.')
+--         end
+--       end
+--     )
+--   end
+
+--   -- Call the function to start the installation
+--   installSpeedMenu()
+
 -- a menubar item for hammerspoon stuff
 myMenu = hs.menubar.new()
 
