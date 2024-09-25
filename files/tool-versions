@@ -1,5 +1,9 @@
-nodejs 19.4.0
-golang 1.18
+nodejs 20.12.2
+golang 1.21.0
 erlang 23.3
 elixir 1.11
 flutter 3.10.4-stable
+aws-vault 7.2.0
+python 3.11.4
+ruby 3.2.3
+rust 1.81.0

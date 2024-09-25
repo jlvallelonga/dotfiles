@@ -9,6 +9,10 @@ alias killswaps='find . -iname "*.sw[p|n|m]" | xargs rm'
 # source zshrc
 alias szrc="source ~/.zshrc"
 
+
+alias loadDotEnv='export $(cat .env | xargs)'
+
+
 # git
 alias gsl='git stash list'
 alias gss='git stash show -p'
@@ -30,3 +34,6 @@ alias gpuoh='git push -u origin HEAD'
 alias ep="vim ~/elixir_play.exs"
 alias rep="elixirc ~/elixir_play.exs"
 alias ie="vim ~/.iex.exs"
+
+# docker
+alias dco='docker compose'

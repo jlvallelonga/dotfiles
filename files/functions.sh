@@ -1,6 +1,27 @@
 SRC_DIR=~/src/
 SSH_DIR=~/.ssh/
 DOTFILES_DIR=~/.dotfiles/
+GITHUB_USERNAME='jlvallelonga'
+
+# colors
+NC='\033[0m' # No Color
+NORMAL="\033[0;39m"
+
+BLACK="\033[30m"
+RED="\033[31m"
+GREEN="\033[32m"
+YELLOW="\033[33m"
+BLUE="\033[34m"
+PINK="\033[35m"
+CYAN="\033[36m"
+WHITE="\033[37m"
+
+source ./functions/bash.sh
+
+
+# playground
+np () { cd ~/playground; }
+opp () { oide ~/playground; }
 
 # navigation - format: n<location or project>
 ndf () { cd $DOTFILES_DIR; }
@@ -38,6 +59,22 @@ opdf () { oide $DOTFILES_DIR;}
 # pull dotfiles changes from remote repo
 gedf () { local CURRDIR=`pwd`; ndf; ge; cd $CURRDIR; }
 
+# add a path to the ~./path_dirs file
+apd () { echo $1 >> ~/.path_dirs; }
+ppd () { cat ~/.path_dirs; }
+epd () { oide ~/.path_dirs; }
+path () { echo $PATH; }
+# split path into lines and print it
+p () { echo $PATH | tr ':' '\n' | sort; }
+
+# remove duplicate values from $PATH
+remove_path_env_duplicates () { export PATH=$(echo -n $PATH | awk -v RS=: -v ORS=: '!a[$0]++'); }
+
+# alphabetize env vars and print
+e () { env | sort  }
+
+restart_gnome () { busctl --user call org.gnome.Shell /org/gnome/Shell org.gnome.Shell Eval s 'Meta.restart("Restarting…")' }
+
 # docker
 docker_started () {
     if docker ps > /dev/null 2>&1; then
@@ -48,35 +85,38 @@ docker_started () {
         return 1;
     fi
 }
-start_docker () {
-    if ! docker_started; then
-        echo "Docker not started. Starting now.";
-        # open -a Docker;
-        open -a Orbstack;
-    fi
-    max_retry=30
-    retry=0
-    while [ ${retry} -lt ${max_retry} ]; do
-        if docker_started; then
-            break
-        else
-            echo "docker not yet started";
-            (( retry = retry + 1 ))
-            sleep 1;
-        fi
-    done
-}
-dcomp () { start_docker; dco $@; }
+# start_docker () {
+#     if ! docker_started; then
+#         echo "Docker not started. Starting now.";
+#         open -a Docker;
+#         # open -a Orbstack;
+#     fi
+#     max_retry=30
+#     retry=0
+#     while [ ${retry} -lt ${max_retry} ]; do
+#         if docker_started; then
+#             break
+#         else
+#             echo "docker not yet started";
+#             (( retry = retry + 1 ))
+#             sleep 1;
+#         fi
+#     done
+# }
+# dcomp () { start_docker; dco $@; }
+dcomp () { dco $@; }
 dcou () { dcomp up $@; }
 dcob () { dcomp build $@; }
 dcod () { dcomp down $@; }
 dcoub () { dcou --build; }
 dcor () { dcomp restart $@; }
-dps () { start_docker; docker ps; }
-dbash () { start_docker; docker exec -it $1 bash; }
+# dps () { start_docker; docker ps; }
+# dps () { docker ps; }
+# dbash () { start_docker; docker exec -it $1 bash; }
+dbash () { docker exec -it $1 bash; }
 dreset () {
     echo "--- docker compose down --volumes ---"
-    dcod -v;
+    docker compose down -v;
     echo "--- pruning containers ---"
     docker container prune -f;
     echo "--- pruning images ---"
@@ -123,11 +163,13 @@ bejs () { bundle exec jekyll serve; }
 # go
 gog () { go get $@; asdf reshim golang; }
 goi () { go install $@; asdf reshim golang; }
+gmi () { go mod init github.com/$GITHUB_USERNAME/$@; }
 gmt () { go mod tidy; }
 gmd () { go mod download; }
 gt () { go test ./... --coverprofile=c.out; }
 gtcover () { gt; go tool cover -html c.out; }
 gcover () { go tool cover -html c.out; }
+
 
 # other
 kmps () { ps aux | grep 'mix phx.server' | grep -v grep | awk '{print "kill -9 " $2}' | bash; }

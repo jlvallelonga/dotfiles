@@ -10,6 +10,9 @@
     ~/.zshenv:
       force: true
       path: files/zshenv
+    ~/.zprofile:
+      force: true
+      path: files/zprofile
     ~/.zshrc:
       force: true
       path: files/zshrc
@@ -21,6 +24,12 @@
     ~/.default-npm-packages: files/default-npm-packages
     ~/.gitconfig: files/gitconfig
     ~/.gitignore_global: files/gitignore_global
+    ~/.path_dirs: files/path_dirs
+    ~/.functions/:
+      relink: true
+      glob: true
+      create: true
+      path: files/functions/*.sh
     # ~/.atom/config.cson:
     #   force: true
     #   path: atom/config.cson

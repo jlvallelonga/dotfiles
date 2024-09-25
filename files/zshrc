@@ -98,3 +98,44 @@ source ~/.zshrc_private
 
 # start shell at starting directory
 nsd
+
+# pnpm
+export PNPM_HOME="/home/jlvallelonga/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/jlvallelonga/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/jlvallelonga/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/jlvallelonga/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/jlvallelonga/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+# bun completions
+[ -s "/home/jlvallelonga/.bun/_bun" ] && source "/home/jlvallelonga/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+export PATH="/home/jlvallelonga/.local/bin:$PATH"
+
+# load all directories from ~/.path_dirs into PATH
+for dir in $(cat ~/.path_dirs); do
+  export PATH="$dir:$PATH"
+done
+
+fpath=(~/.stripe $fpath)
+autoload -Uz compinit && compinit -i
+# echo "loaded zshrc"
+
+remove_path_env_duplicates

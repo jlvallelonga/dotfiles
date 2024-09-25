@@ -49,5 +49,10 @@ echo '--- Docker Compose install steps ---'
 sudo curl -L "https://github.com/docker/compose/releases/download/1.29.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 
+echo '--- Installing software with snap package manager ---'
+sudo snap install --classic code
+sudo snap install slack
+sudo snap install zoom-client
+
 echo '--- Changing shell to zsh (relogin for this to take effect) ---'
 chsh -s $(which zsh)
