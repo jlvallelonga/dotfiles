@@ -17,7 +17,7 @@ echo '--- Creating ~/.starting_directory file ---'
 (cd ~/src && echo `pwd` > ~/.starting_directory)
 
 echo '--- Running dotbot install ---'
-./install_dotbot.sh
+./dotbot_install.sh
 
 echo '--- Running krew install ---'
 (

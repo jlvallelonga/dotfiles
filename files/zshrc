@@ -91,9 +91,7 @@ source $ZSH/oh-my-zsh.sh
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
-# Aliases, Functions, and local private entries
-source ~/.dotfiles/files/aliases.sh
-source ~/.dotfiles/files/functions.sh
+source ~/.shell_bootstrap.sh
 source ~/.zshrc_private
 
 # start shell at starting directory
@@ -127,15 +125,9 @@ unset __conda_setup
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
-export PATH="/home/jlvallelonga/.local/bin:$PATH"
-
-# load all directories from ~/.path_dirs into PATH
-for dir in $(cat ~/.path_dirs); do
-  export PATH="$dir:$PATH"
-done
 
 fpath=(~/.stripe $fpath)
 autoload -Uz compinit && compinit -i
-# echo "loaded zshrc"
 
+load_path_from_file
 remove_path_env_duplicates

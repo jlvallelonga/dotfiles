@@ -28,6 +28,7 @@ openjdk-11-jdk \
 zsh \
 curl \
 vim \
+ripgrep \
 apt-transport-https \
 ca-certificates \
 gnupg \
@@ -48,6 +49,19 @@ sudo usermod -aG docker $USER
 echo '--- Docker Compose install steps ---'
 sudo curl -L "https://github.com/docker/compose/releases/download/1.29.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
+
+echo '--- Installing Python and tools ---'
+# skip if python3 is not installed
+if ! command -v python3 &> /dev/null
+then
+    echo "python3 could not be found"
+else
+    sudo apt-get -y install python3-pip
+    pip3 install --upgrade pip
+    # pip3 install virtualenv
+
+    pip3 install jtbl
+fi
 
 echo '--- Installing software with snap package manager ---'
 sudo snap install --classic code

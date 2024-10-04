@@ -25,29 +25,11 @@
     ~/.gitconfig: files/gitconfig
     ~/.gitignore_global: files/gitignore_global
     ~/.path_dirs: files/path_dirs
-    ~/.functions/:
+    ~/.shell_bootstrap.sh: files/shell_bootstrap.sh
+    ~/.shell/:
       relink: true
-      glob: true
-      create: true
-      path: files/functions/*.sh
-    # ~/.atom/config.cson:
-    #   force: true
-    #   path: atom/config.cson
-    # ~/.atom/init.coffee:
-    #   force: true
-    #   path: atom/init.coffee
-    # ~/.atom/keymap.cson:
-    #   force: true
-    #   path: atom/keymap.cson
-    # ~/.atom/snippets.cson:
-    #   force: true
-    #   path: atom/snippets.cson
-    # ~/.atom/styles.less:
-    #   force: true
-    #   path: atom/styles.less
-    # ~/.atom/packages.cson:
-    #   force: true
-    #   path: atom/packages.cson
+      force: true
+      path: files/shell/
     ~/.hammerspoon:
       if: "[ `uname` = Darwin ]"
       path: files/hammerspoon
