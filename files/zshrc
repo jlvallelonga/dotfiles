@@ -94,6 +94,16 @@ source $ZSH/oh-my-zsh.sh
 source ~/.shell_bootstrap.sh
 source ~/.zshrc_private
 
+# to run tests, use the `rlt` alias which sets the env var and then resets
+# purposfully loading this after the bootstrapping process because all of the functions need to be loaded first
+if [ "$RUN_TESTS" = "true" ]; then
+  echo "running tests for shell functions"
+  bootstrap_dir ~/.shell/tests "*.test.sh"
+  newline
+fi
+
+source ~/.shell_after_bootstrap.sh
+
 # start shell at starting directory
 nsd
 

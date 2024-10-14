@@ -26,6 +26,7 @@
     ~/.gitignore_global: files/gitignore_global
     ~/.path_dirs: files/path_dirs
     ~/.shell_bootstrap.sh: files/shell_bootstrap.sh
+    ~/.shell_after_bootstrap.sh: files/shell_after_bootstrap.sh
     ~/.shell/:
       relink: true
       force: true

@@ -13,11 +13,11 @@ CYAN="\033[36m"
 WHITE="\033[37m"
 
 # functions to return text that is colored
-black () { echo -e "$BLACK$@$NC"; }
-red () { echo -e "$RED$@$NC"; }
-green () { echo -e "$GREEN$@$NC"; }
-yellow () { echo -e "$YELLOW$@$NC"; }
-blue () { echo -e "$BLUE$@$NC"; }
-pink () { echo -e "$PINK$@$NC"; }
-cyan () { echo -e "$CYAN$@$NC"; }
-white () { echo -e "$WHITE$@$NC"; }
+black () { printf "$BLACK$@$NC"; }
+red () { printf "$RED$@$NC"; }
+green () { printf "$GREEN$@$NC"; }
+yellow () { printf "$YELLOW$@$NC"; }
+blue () { printf "$BLUE$@$NC"; }
+pink () { printf "$PINK$@$NC"; }
+cyan () { printf "$CYAN$@$NC"; }
+white () { printf "$WHITE$@$NC"; }

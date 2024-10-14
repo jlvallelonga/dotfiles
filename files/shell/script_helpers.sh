@@ -1,8 +1,10 @@
 # || true is used to prevent the function from exiting with a non-zero status
 press_any_key_to_continue () { read -q '?press any key to continue...' || true; }
-error () { echo -e $(red "ERROR: $@"); }
+error () { echo -e $(red "ERROR: $(piped_or_first_arg $@)"); }
 print_exit_code_of_last_command () { echo $?; }
-last_command_failed () { [ $? -ne 0 ]; }
+# last_command_result () { return $?; }
+last_command_failed () { [ $? -eq 1 ]; }
+last_command_succeeded () { [ $? -eq 1 ]; }
 # pass a failure message as an argument
 require_success () {
   if last_command_failed; then
@@ -10,7 +12,6 @@ require_success () {
     exit 1
   fi
 }
-
 
 require_env_vars () {
   # pass the required env vars as arguments
@@ -59,7 +60,6 @@ require_files_exist () {
 
 # the full path of the directory that the current script exists in
 parent_dir () { dirname $1; }
-deprecate () { echo "This function is deprecated. Use \"$1\" instead"; }
 location_of_function () { echo "${functions_source[$1]}"; }
 
 run_script () {
@@ -94,11 +94,91 @@ this_script_location () {
   echo "${functions_source[temp_function_for_getting_location]}"
 }
 
-# usage: first_arg_or_piped $@
-first_arg_or_piped () {
-  if [ -t 0 ]; then
-    echo $1
+# shell function to return the piped value if there is one or the first argument if there isn't
+# will shift and consume the first argument if there is one
+piped_or_first_arg () {
+  # if there's a piped value, use that
+  # if not take the first argument and shift
+  piped=$(piped_value)
+  is_empty $piped
+  piped_is_empty=$?
+  if [ $piped_is_empty -eq 0 ]; then
+    val=$1
+    if is_empty $val; then
+      return 1
+    fi
+    more_args_present $@
+    have_more_args=$?
+    if [ $have_more_args ]; then
+      shift
+    fi
+    echo $val
   else
+    echo $piped
+  fi
+}
+
+
+piped_value () {
+  if [ ! -t 0 ]; then
     cat
+  fi
+}
+
+# if the first argument is empty, return true
+# usage: if is_empty $4; then
+is_empty () {
+  if [ -z "$1" ]; then
+    return 0
+  else
+    return 1
+  fi
+}
+
+# if the first argument is not empty, return true
+# usage: if present $3; then
+present () {
+  if [ -n "$1" ]; then
+    return 0
+  else
+    return 1
+  fi
+}
+
+# if there's more than just $1, return true
+# you have to forward the arguments to this function like so: more_args_present $@
+more_args_present () {
+  if [ -n "$2" ]; then
+    return 0
+  else
+    return 1
+  fi
+}
+
+# usage: get_value_for_flag flag $@
+# given one --one two --three four
+# this will return two
+# given three --one two --three four
+# this will return four
+get_value_for_flag() {
+  flag=$1
+  shift
+
+  while [[ $# -gt 0 ]]; do
+    if [[ "$1" == "--$flag" ]]; then
+      echo $2
+      return
+    fi
+    shift
+  done
+
+  return 1
+}
+
+print_result () {
+  if last_command_succeeded; then
+    echo "success"
+  else
+    echo "failure"
   fi
 }
