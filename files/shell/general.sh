@@ -1,6 +1,6 @@
 alias la='ls -AFhlas --color --group-directories-first $@'
 
-sayhi () { echo "Hi!"; }
+sayhi () { echo "Hi there!"; }
 
 set_test_env () { export RUN_TESTS=true; }
 unset_test_env () { export RUN_TESTS=false; }
