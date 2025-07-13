@@ -11,3 +11,17 @@ private_ip_address_v4 () {
   fi
 }
 alias ipp=private_ip_address_v4
+
+ipinfo () { curl ipinfo.io; echo ""; }
+
+location () { curl ipinfo.io/city; }
+alias loc=location
+
+# all info
+ipa () {
+  echo "Public IP: $(public_ip_address_v4)"
+  echo "Private IP: $(private_ip_address_v4)"
+  # location info etc
+  ipinfo
+  echo ""
+}

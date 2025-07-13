@@ -1,6 +1,4 @@
 
-DOTFILES_DIR=~/.dotfiles/
-
 ndf () { cd $DOTFILES_DIR; }
 
 opdf () { deprecated "edf"; }

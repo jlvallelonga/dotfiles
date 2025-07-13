@@ -5,3 +5,12 @@
 # file that is created when running code in vscode via Code Runner
 # https://marketplace.visualstudio.com/items?itemName=formulahendry.code-runner
 **/tempCodeRunnerFile.sh
+
+**/*compose.override.y*ml
+
+**/*credentials.json
+
+# never commit .env files
+**/.env
+
+**/nohup.out

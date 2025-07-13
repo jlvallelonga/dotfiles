@@ -10,4 +10,60 @@ export ERL_AFLAGS="-kernel shell_history enabled"
 
 export HISTCONTROL=ignoredups
 
+export MCFLY_KEY_SCHEME=vim
+export MCFLY_RESULTS=50
+
+# # my env vars (from ~/.env)
+# while IFS='=' read -r name value; do
+#   # replace "~" with "$HOME"
+#   clean_value="${value/#\~/$HOME}"
+
+#   # remove trailing comments from expanded (#...)
+#   clean_value="${clean_value%%#*}"
+
+#   # and trim whitespace
+#   clean_value="$(echo -e "${clean_value}" | sed -e 's/[[:space:]]*$//')"
+
+#   # continue if name or value is empty
+#   if [ -z "$name" ] || [ -z "$clean_value" ]; then
+#     continue
+#   fi
+
+#   export $name=$clean_value
+# done < ~/.env
+
+loadEnvFile () {
+  envFile=$1
+  if [ -z "$envFile" ]; then
+    echo "Usage: loadEnvFile <file>"
+    return 1
+  fi
+
+  while IFS='=' read -r name value; do
+    # replace "~" with "$HOME"
+    clean_value="${value/#\~/$HOME}"
+
+    # remove trailing comments from expanded (#...)
+    clean_value="${clean_value%%#*}"
+
+    # and trim whitespace
+    clean_value="$(echo -e "${clean_value}" | sed -e 's/[[:space:]]*$//')"
+
+    # continue if name or value is empty
+    if [ -z "$name" ] || [ -z "$clean_value" ]; then
+      continue
+    fi
+
+    # skip any commented out lines
+    if [[ $name == \#* ]]; then
+      continue
+    fi
+
+    export $name=$clean_value
+  done < $envFile
+}
+
+loadEnvFile ~/.env
+
+# private env vars
 source ~/.zshenv_private

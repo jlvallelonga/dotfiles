@@ -1,16 +1,44 @@
 # || true is used to prevent the function from exiting with a non-zero status
-press_any_key_to_continue () { read -q '?press any key to continue...' || true; }
-error () { echo -e $(red "ERROR: $(piped_or_first_arg $@)"); }
+press_any_key_to_continue () { read -q '?press any key to continue...(or ctrl+c to exit)' || true; }
+success () { echo -e $(green "SUCCESS: $(piped_or_next_arg $@)"); }
+error () { echo -e $(red "ERROR: $(piped_or_next_arg $@)"); }
 print_exit_code_of_last_command () { echo $?; }
 # last_command_result () { return $?; }
 last_command_failed () { [ $? -eq 1 ]; }
 last_command_succeeded () { [ $? -eq 1 ]; }
+
 # pass a failure message as an argument
 require_success () {
   if last_command_failed; then
     echo $1
     exit 1
   fi
+}
+
+# if the user presses y, return 0
+# if the user presses n, return 1
+# read one character. don't require the user to press enter
+continue_yes_no () {
+  printf "Continue? (y/n):"
+  response=$(read_single_character)
+  newline
+
+  if [ "$response" = "y" ]; then
+    echo "Continuing..."
+    return 0
+  else
+    echo "Exiting..."
+    return 1
+  fi
+}
+
+# read a single character and return it
+# don't require the user to press enter
+read_single_character () {
+  stty -icanon
+  char=$(dd bs=1 count=1 2>/dev/null)
+  stty icanon
+  echo $char
 }
 
 require_env_vars () {
@@ -96,22 +124,23 @@ this_script_location () {
 
 # shell function to return the piped value if there is one or the first argument if there isn't
 # will shift and consume the first argument if there is one
-piped_or_first_arg () {
+piped_or_next_arg () {
   # if there's a piped value, use that
   # if not take the first argument and shift
   piped=$(piped_value)
-  is_empty $piped
-  piped_is_empty=$?
-  if [ $piped_is_empty -eq 0 ]; then
+  # empty $piped
+  # piped_is_empty=$?
+  # if [ $piped_is_empty -eq 0 ]; then
+  if empty $piped; then
     val=$1
-    if is_empty $val; then
+    if empty $val; then
       return 1
     fi
-    more_args_present $@
-    have_more_args=$?
-    if [ $have_more_args ]; then
-      shift
-    fi
+    # more_args_present $@
+    # have_more_args=$?
+    # if [ $have_more_args ]; then
+    #   shift
+    # fi
     echo $val
   else
     echo $piped
@@ -125,23 +154,25 @@ piped_value () {
   fi
 }
 
-# if the first argument is empty, return true
-# usage: if is_empty $4; then
-is_empty () {
+# if the value is empty, return true (0)
+# usage: if empty $4; then
+# -z = empty (zero length)
+empty () {
   if [ -z "$1" ]; then
-    return 0
+    return 0 # return true (0)
   else
-    return 1
+    return 1 # return false (1)
   fi
 }
 
 # if the first argument is not empty, return true
 # usage: if present $3; then
+# -n = not empty (non-zero length)
 present () {
   if [ -n "$1" ]; then
-    return 0
+    return 0 # return true (0)
   else
-    return 1
+    return 1 # return false (1)
   fi
 }
 
@@ -155,12 +186,29 @@ more_args_present () {
   fi
 }
 
-# usage: get_value_for_flag flag $@
+flag_value_or_default () {
+  flag=$1
+  default=$2
+  shift
+  shift
+
+  while [[ $# -gt 0 ]]; do
+    if [[ "$1" == "--$flag" ]]; then
+      echo $2
+      return
+    fi
+    shift
+  done
+
+  echo $default
+}
+
+# usage: flag_value flag $@
 # given one --one two --three four
 # this will return two
 # given three --one two --three four
 # this will return four
-get_value_for_flag() {
+flag_value() {
   flag=$1
   shift
 
@@ -168,6 +216,20 @@ get_value_for_flag() {
     if [[ "$1" == "--$flag" ]]; then
       echo $2
       return
+    fi
+    shift
+  done
+
+  echo ""
+}
+
+flag_is_present() {
+  flag=$1
+  shift
+
+  while [[ $# -gt 0 ]]; do
+    if [[ "$1" == "--$flag" ]]; then
+      return 0
     fi
     shift
   done
@@ -181,4 +243,14 @@ print_result () {
   else
     echo "failure"
   fi
+}
+
+remove_comment() {
+  local input_string="$1"
+  local cleaned_string="${input_string%%#*}"
+
+  # Trim any trailing spaces or leading spaces
+  cleaned_string="$(echo -e "${cleaned_string}" | sed -e 's/[[:space:]]*$//')"
+
+  echo "$cleaned_string"
 }

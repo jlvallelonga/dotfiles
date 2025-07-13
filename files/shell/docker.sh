@@ -65,9 +65,13 @@ dls () {
 # dps () { start_docker; docker ps; }
 # dps () { docker ps; }
 # dbash () { start_docker; docker exec -it $1 bash; }
-dcorun () { docker compose run $@; }
+drun () { docker exec -it $@; } # {container} {command}
+
+# this seems to start a new container instead of attaching to the existing one
+dcorun () { docker compose run $@; } # {service} {command}
+
 dcobash () { dcorun $@ /bin/bash; }
-dbash () { docker exec -it $1 bash; }
+dbash () { drun $1 bash; }
 dreset () {
     echo "--- docker compose down --volumes ---"
     docker compose down -v;

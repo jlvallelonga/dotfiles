@@ -12,6 +12,9 @@ rm ~/.zshrc
 echo '--- Creating src directory in home directory ---'
 mkdir ~/src
 
+echo '--- Creating scratch.txt file in home directory ---'
+touch ~/scratch.txt
+
 echo '--- Creating ~/.starting_directory file ---'
 # create the starting directory file with ~/src (the actual explicit path) as the default
 (cd ~/src && echo `pwd` > ~/.starting_directory)
@@ -32,9 +35,10 @@ echo '--- Running krew install ---'
 
 
 echo '--- Installing asdf ---'
-git clone https://github.com/asdf-vm/asdf.git ~/.asdf
-(cd ~/.asdf && git checkout "$(git describe --abbrev=0 --tags)")
-source $HOME/.asdf/asdf.sh
+# git clone https://github.com/asdf-vm/asdf.git ~/.asdf
+# (cd ~/.asdf && git checkout "$(git describe --abbrev=0 --tags)")
+# source $HOME/.asdf/asdf.sh
+brew install asdf
 
 echo '--- Installing asdf plugins ---'
 asdf plugin add nodejs

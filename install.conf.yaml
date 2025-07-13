@@ -10,6 +10,9 @@
     ~/.zshenv:
       force: true
       path: files/zshenv
+    ~/.env:
+      force: true
+      path: files/env
     ~/.zprofile:
       force: true
       path: files/zprofile
@@ -19,6 +22,12 @@
     ~/.vimrc:
       force: true
       path: files/vimrc
+    ~/.prefs.json:
+      force: true
+      path: files/prefs.json
+    ~/.wezterm.lua:
+      force: true
+      path: files/wezterm.lua
     ~/.tool-versions: files/tool-versions
     ~/.asdfrc: files/asdfrc
     ~/.default-npm-packages: files/default-npm-packages
@@ -28,7 +37,6 @@
     ~/.shell_bootstrap.sh: files/shell_bootstrap.sh
     ~/.shell_after_bootstrap.sh: files/shell_after_bootstrap.sh
     ~/.shell/:
-      relink: true
       force: true
       path: files/shell/
     ~/.hammerspoon:

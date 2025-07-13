@@ -16,3 +16,5 @@
 	branch = green
 [init]
 	defaultBranch = main
+[mergetool "vscode"]
+	cmd = code --wait --merge $REMOTE $LOCAL $BASE $MERGED

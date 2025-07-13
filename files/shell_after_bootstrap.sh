@@ -1,4 +1,18 @@
-# anything you just want to mess with after all the functions have loaded
+# start shell at starting directory
+nsd
+
+# load path from the path_dirs file
+load_path_from_file
+
+# run tests if the RUN_TESTS env var is set
+
+# to run tests, use the `rlt` alias which sets the env var and then resets
+# purposfully loading this after the bootstrapping process because all of the functions need to be loaded first
+if [ "$RUN_TESTS" = "true" ]; then
+  run_shell_function_tests
+fi
+
+# then anything you just want to mess with after all the functions have loaded
 
 new_version () {
   repo="ReimuNotMoe/ydotool"

@@ -1,6 +1,49 @@
 alias la='ls -AFhlas --color --group-directories-first $@'
+alias tf='tail -f $@'
+
+scratch () { ide ~/scratch.txt; }
+alias notes='scratch'
+
+nb () { cd ~/bin;}
+
+# set project (and open)
+sp () { ssd; code .; }
 
 sayhi () { echo "Hi there!"; }
+
+state_abbreviations () { echo "AL AK AS AZ AR CA CO CT DE DC FM FL GA GU HI ID IL IN IA KS KY LA ME MH MD MA MI MN MS MO MT NE NV NH NJ NM NY NC ND MP OH OK OR PW PA PR RI SC SD TN TX UT VT VI VA WA WV WI WY"; }
+
+print_line_range () {
+  start=$1
+  shift
+  echo "start: $start"
+
+  end=$1
+  shift
+  echo "end: $end"
+
+  file_contents=$(piped_value $@)
+  file_path=$1
+  if empty $file_contents && empty $file_path; then
+    echo "No file specified"
+    echo "Usage: print_range <start> <end>"
+    return 1
+  fi
+
+  if
+
+  if [[ -z "$start" || -z "$end" ]]; then
+    echo "missing start or end"
+    echo "Usage: print_range <start> <end>"
+    return 1
+  fi
+
+  if present $file_contents; then
+    echo "$file_contents" | sed -n "$start,$end p"
+  else
+    sed -n "$start,$end p" "$file_path"
+  fi
+}
 
 set_test_env () { export RUN_TESTS=true; }
 unset_test_env () { export RUN_TESTS=false; }
@@ -26,7 +69,7 @@ print_args () {
     echo "(No piped value)"
   fi
 
-  if is_empty $1; then
+  if empty $1; then
     echo "(No arguments)"
   fi
 
@@ -41,10 +84,10 @@ deprecated () {
   replacement=$1
   shift
 
-  sleep_seconds=$(get_value_for_flag "sleep" $@)
+  sleep_seconds=$(flag_value "sleep" $@)
   # print_args $@
 
-  if is_empty $replacement; then
+  if empty $replacement; then
     error "You must provide a replacement function to the \"deprecated\" function"
     return 1
   fi
@@ -68,7 +111,7 @@ kill_terminal () { exit 0; }
 alias kt='kill_terminal'
 
 print_with_line_numbers () {
-  echo -e "$(piped_or_first_arg $@)" | cat -n;
+  echo -e "$(piped_or_next_arg $@)" | cat -n;
 }
 
 where_is () {
@@ -115,6 +158,21 @@ br () {
 
 newline () { echo ""; }
 
+untargz () {
+  if [[ -z "$1" ]]; then
+    echo "Usage: untargz <file>"
+    return 1
+  fi
+
+  file=$1
+  if [[ -f $file ]]; then
+    echo "Untargzipping $file"
+    tar -xvzf $file
+  else
+    echo "File not found: $file"
+    return 1
+  fi
+}
 
 make_it_mine () {
   if [[ -z "$1" ]]; then
@@ -130,4 +188,65 @@ make_it_mine () {
     echo "File not found: $file"
     return 1
   fi
+
+  dir_of_file=$(dirname $file)
+  ls -la $dir_of_file | grep $(basename $file)
+}
+
+screen_backlight_fully_down () {
+  for i in {1..20}; do
+    type_key $KEY_BACKLIGHT_DOWN
+  done
+}
+
+screen_backlight_normal () {
+  for i in {1..10}; do
+    type_key $KEY_BACKLIGHT_UP
+  done
+}
+
+keyboard_backlight_fully_down () {
+  for i in {1..5}; do
+    type_key $KEY_KEYBOARD_BRIGHTNESS_DOWN
+  done
+}
+
+keyboard_backlight_normal () {
+  for i in {1..5}; do
+    type_key $KEY_KEYBOARD_BRIGHTNESS_UP
+  done
+}
+
+sleep_mode () {
+  screen_backlight_fully_down
+  keyboard_backlight_fully_down
+}
+
+wake_mode () {
+  screen_backlight_normal
+  keyboard_backlight_normal
+}
+
+illuminate_keyboard () {
+  type_key $KEY_KEYBOARD_BRIGHTNESS_DOWN
+  type_key $KEY_KEYBOARD_BRIGHTNESS_UP
+}
+
+starbucks_wifi () {
+  type_text $(kvg first_name)
+  type_key $KEY_TAB
+  type_text $(kvg last_name)
+  type_key $KEY_TAB
+  type_key $KEY_TAB
+  type_text $(kvg passport)
+  type_key $KEY_TAB
+  type_text $(kvg phone)
+  type_key $KEY_TAB
+  type_text $(kvg email)
+  type_key $KEY_TAB
+  type_key $KEY_SPACE
+}
+
+window_left () {
+  type_combo $KEY_LEFTMETA $KEY_LEFT
 }

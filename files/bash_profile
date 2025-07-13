@@ -1,5 +1,6 @@
 # export YDOTOOL_SOCKET=/tmp/.ydotool_socket
 export YDOTOOL_SOCKET=/run/user/1000/.ydotool_socket
+
 # sudo ln -s /run/user/1000/.ydotool_socket /tmp/.ydotool_socket
 # https://askubuntu.com/questions/1413829/how-can-i-install-and-use-the-latest-ydotool-keyboard-automation-tool-working-o
 

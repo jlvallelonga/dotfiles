@@ -19,7 +19,8 @@ bootstrap_dir() {
     shift
   fi
 
-  find_opts="-L $directory -maxdepth 1 -type f -name $file_pattern"
+  # find_opts="-L $directory -maxdepth 1 -type f -name $file_pattern"
+  find_opts="-L $directory -type f -name $file_pattern"
 
   # if there's an exclude pattern, use it
   if [ -n "$1" ]; then
@@ -33,10 +34,13 @@ bootstrap_dir() {
   files=($(echo "$find_opts" | xargs find))
   # echo "number of files: ${#files[@]}"
   for file in $files; do
+    # echo "loading file: $file"
     source $file
   done
 }
 
-# bootstrap_dir ~/.shell "*.foo" "*.bar"
 bootstrap_dir ~/.shell "*.sh" "*.test.sh"
 # bootstrap_dir ~/.shell "*.sh"
+
+source ~/.zshrc_private
+source ~/.shell_after_bootstrap.sh

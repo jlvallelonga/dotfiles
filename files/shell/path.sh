@@ -1,4 +1,3 @@
-
 # add a path to the ~./path_dirs file
 apd () { echo $1 >> ~/.path_dirs; }
 ppd () { cat ~/.path_dirs; }
@@ -15,6 +14,8 @@ load_path_from_file () {
   for dir in $(cat ~/.path_dirs); do
     export PATH="$dir:$PATH"
   done
+
+  remove_path_env_duplicates
 }
 
 path_functions_location() {

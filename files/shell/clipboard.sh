@@ -1,6 +1,6 @@
 
 copy_to_clipboard () {
-  arg=$(piped_or_first_arg $@)
+  arg=$(piped_or_next_arg $@)
   # if pbcopy is not available, use xclip
   if command -v pbcopy &> /dev/null; then
     echo -n "$arg" | pbcopy
@@ -9,3 +9,11 @@ copy_to_clipboard () {
   fi
 }
 alias ctc=copy_to_clipboard
+
+paste_from_clipboard () {
+  if command -v pbpaste &> /dev/null; then
+    pbpaste
+  else
+    xclip -selection clipboard -o
+  fi
+}

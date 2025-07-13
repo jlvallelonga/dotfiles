@@ -1,5 +1,3 @@
-IDE=code
-
 # open IDE with args
 oide () { deprecated "ide" $@; }
 ide () { $IDE $@; }

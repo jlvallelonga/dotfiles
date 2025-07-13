@@ -1,6 +1,6 @@
 # elixir
-alias ep="vim ~/elixir_play.exs"
-alias rep="elixirc ~/elixir_play.exs"
+# alias ep="vim ~/elixir_play.exs"
+# alias rep="elixirc ~/elixir_play.exs"
 alias ie="vim ~/.iex.exs"
 
 # elixir/phoenix

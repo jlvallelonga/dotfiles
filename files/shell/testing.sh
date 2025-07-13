@@ -25,3 +25,10 @@ fail () {
   error $1
   return 1
 }
+
+# can use "rlt" alias to set the env var and run tests after reloading
+run_shell_function_tests () {
+  echo "running tests for shell functions"
+  bootstrap_dir ~/.shell "*.test.sh"
+  newline
+}

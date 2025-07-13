@@ -70,6 +70,7 @@ setopt histignoredups
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
+# plugins=(asdf docker docker-compose auto-notify)
 plugins=(asdf docker docker-compose)
 
 source $ZSH/oh-my-zsh.sh
@@ -91,22 +92,6 @@ source $ZSH/oh-my-zsh.sh
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
-source ~/.shell_bootstrap.sh
-source ~/.zshrc_private
-
-# to run tests, use the `rlt` alias which sets the env var and then resets
-# purposfully loading this after the bootstrapping process because all of the functions need to be loaded first
-if [ "$RUN_TESTS" = "true" ]; then
-  echo "running tests for shell functions"
-  bootstrap_dir ~/.shell/tests "*.test.sh"
-  newline
-fi
-
-source ~/.shell_after_bootstrap.sh
-
-# start shell at starting directory
-nsd
-
 # pnpm
 export PNPM_HOME="/home/jlvallelonga/.local/share/pnpm"
 case ":$PATH:" in
@@ -114,20 +99,6 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/jlvallelonga/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/jlvallelonga/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/jlvallelonga/anaconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/jlvallelonga/anaconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
 
 # bun completions
 [ -s "/home/jlvallelonga/.bun/_bun" ] && source "/home/jlvallelonga/.bun/_bun"
@@ -136,8 +107,21 @@ unset __conda_setup
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
-fpath=(~/.stripe $fpath)
-autoload -Uz compinit && compinit -i
+# gcc 14.2.0
+export PATH=/usr/local/gcc-14.2.0/bin:$PATH
 
-load_path_from_file
-remove_path_env_duplicates
+fpath=(~/.stripe $fpath)
+
+autoload -Uz compinit && compinit -i
+# autoload -U compinit
+# compinit
+
+eval "$(mcfly init zsh)"
+
+# esptool
+# eval "$(_ESPTOOL_PY_COMPLETE=zsh_source esptool)"
+# eval "$(_ESPSECURE_PY_COMPLETE=zsh_source espsecure)"
+# eval "$(_ESPEFUSE_PY_COMPLETE=zsh_source espefuse)"
+
+# custom setup
+source ~/.shell_bootstrap.sh
