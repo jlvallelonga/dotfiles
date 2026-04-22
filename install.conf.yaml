@@ -42,3 +42,6 @@
     ~/.hammerspoon:
       if: "[ `uname` = Darwin ]"
       path: files/hammerspoon
+    ~/.config/whosthere/config.yaml:
+      force: true
+      path: files/whosthere/config.yaml

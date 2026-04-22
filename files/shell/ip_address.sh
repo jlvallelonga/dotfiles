@@ -1,6 +1,6 @@
 
 public_ip_address_v4 () { echo "$(curl -4s icanhazip.com)"; }
-alias ip=public_ip_address_v4
+alias ip_address=public_ip_address_v4
 
 private_ip_address_v4 () {
   # if ipconfig is not available, use ifconfig

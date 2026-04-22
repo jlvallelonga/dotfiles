@@ -33,7 +33,8 @@ apt-transport-https \
 ca-certificates \
 gnupg \
 lsb-releas \
-google-chrome-stable
+google-chrome-stable \
+dnsmasq
 
 echo '--- Docker install steps ---'
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg

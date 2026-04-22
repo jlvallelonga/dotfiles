@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//home/jlvallelonga/.oh-my-zsh/lib/**)"
+    ]
+  }
+}

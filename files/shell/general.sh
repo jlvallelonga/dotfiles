@@ -11,6 +11,36 @@ sp () { ssd; code .; }
 
 sayhi () { echo "Hi there!"; }
 
+fix_bluetooth () {
+  sudo systemctl restart bluetooth
+}
+os_version () {
+  lsb_release -a
+  echo ""
+  uname -a
+}
+
+typing_tutor () {
+  prefs_json=$(get_prefs)
+  tutor_commands=($(echo "$prefs_json" | yq -r '.typing_tutors[]'))
+  echo "select a typing tutor program:"
+  tutor_command=$(gum choose "${tutor_commands[@]}")
+  if empty $tutor_command; then
+    error "No typing tutor program selected"
+    return 1
+  fi
+
+  echo "Running typing tutor: $tutor_command"
+  $tutor_command
+}
+
+send_file_to_phone () { qrcp $@; }
+receive_file_from_phone () { qrcp receive; }
+
+fixtime () {
+  sudo ntpdate ntp.ubuntu.com
+}
+
 state_abbreviations () { echo "AL AK AS AZ AR CA CO CT DE DC FM FL GA GU HI ID IL IN IA KS KY LA ME MH MD MA MI MN MS MO MT NE NV NH NJ NM NY NC ND MP OH OK OR PW PA PR RI SC SD TN TX UT VT VI VA WA WV WI WY"; }
 
 print_line_range () {

@@ -1,10 +1,10 @@
-nodejs 24.2.0
+nodejs 22.20.0
 golang 1.24.2
 erlang 23.3
 elixir 1.11
 flutter 3.10.4-stable
 aws-vault 7.2.0
-ruby 3.2.3
+ruby 3.4.7
 rust 1.81.0
 lazydocker 0.24.1
 python 3.13.5

@@ -33,7 +33,7 @@ docker_started () {
 dcomp () { dco $@; }
 dcou () { dcomp up $@; }
 dcob () { dcomp build $@; }
-dcod () { dcomp down $@; }
+dcod () { dcomp down --remove-orphans $@; }
 dcodd () { dcod --volumes --rmi all --remove-orphans; }
 dcoub () { dcou --build; }
 dcor () { dcomp restart $@; }

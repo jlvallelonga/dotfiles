@@ -1,6 +1,11 @@
 GITHUB_USERNAME=jlvallelonga
 IDE=code
 
+# --wait doesn't work with vscode on linux I guess?
+# VISUAL="code --wait"
+
+EDITOR="vim"
+
 # Directories
 PLAYGROUND_DIR=~/playground
 SRC_DIR=~/src/

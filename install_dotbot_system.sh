@@ -1,8 +1,18 @@
 #!/usr/bin/env bash
+#
+# Installs system-level dotbot symlinks that require root permissions (e.g. /etc/).
+# Called automatically by install_dotbot.sh via sudo, but can also be run directly:
+#
+#   sudo ./install_dotbot_system.sh
 
 set -e
 
-CONFIG="install.conf.yaml"
+if [ "$EUID" -ne 0 ]; then
+  echo "Error: this script must be run with sudo" >&2
+  exit 1
+fi
+
+CONFIG="install.system.conf.yaml"
 DOTBOT_DIR="dotbot"
 
 DOTBOT_BIN="bin/dotbot"
