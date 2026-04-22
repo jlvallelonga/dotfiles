@@ -1,5 +1,6 @@
-nodejs 19.4.0
-golang 1.18
+nodejs lts-hydrogen
+golang 1.21.0
 erlang 23.3
 elixir 1.11
 flutter 3.10.4-stable
+ruby 3.2.3
